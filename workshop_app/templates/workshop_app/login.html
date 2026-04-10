@@ -1,53 +1,148 @@
-{% extends 'workshop_app/base.html' %}
+{% extends 'workshop_app/base_modern.html' %}
 
 {% block title %}
-    Login
+    Login - FOSSEE Workshops
 {% endblock %}
 
 {% block content %}
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-6 col-md-offset-6">
-                <div class="card">
-                    <div class="card-body">
-                        <form class="px-3 py-3" method="post">
-                        {% csrf_token %}
-                        {% if form.errors %}
+<div class="container-centered" style="min-height: 100vh;">
+    <div style="width: 100%; max-width: 420px; padding: 16px;">
+        
+        <!-- Login Card -->
+        <div class="card glass-card" style="animation: slideUp 0.6s ease-out;">
+
+            <!-- Header -->
+            <div class="card-header" style="justify-content: center; flex-direction: column; text-align: center; border-bottom: 1px solid rgba(255, 255, 255, 0.1);">
+                <div style="font-size: 48px; margin-bottom: 12px; text-shadow: 0 0 20px rgba(0, 217, 255, 0.3); animation: floatIn 0.8s ease-out;">🔐</div>
+                <h1 style="font-size: 32px; margin-bottom: 8px; background: linear-gradient(135deg, #00D9FF, #FF00FF); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; font-weight: 700;">Welcome Back</h1>
+                <p style="font-size: 14px; color: rgba(255, 255, 255, 0.6); margin-bottom: 0;">Sign in to your FOSSEE account</p>
+            </div>
+
+            <!-- Body -->
+            <div class="card-body" style="padding-top: 24px;">
+
+                <!-- Error Messages -->
+                {% if form.errors %}
+                    <div class="alert alert-error" style="display: flex; align-items: center; gap: 12px; padding: 12px 16px; background: rgba(255, 0, 85, 0.05); border: 2px solid #FF0055; border-radius: 8px; color: #FF0055; animation: slideDown 0.3s ease-out; margin-bottom: 16px;">
+                        <span>⚠️</span>
+                        <div>
                             {% for field in form %}
                                 {% for error in field.errors %}
-                                    <div class="alert alert-dismissible alert-danger">
-                                        <button type="button" class="close" data-dismiss="alert">
-                                            <i class="fa fa-close"></i>
-                                        </button>
-                                        <strong>{{ error|escape }}</strong>
-                                    </div>
+                                    <div>{{ error|escape }}</div>
                                 {% endfor %}
                             {% endfor %}
                             {% for error in form.non_field_errors %}
-                                <div class="alert alert-dismissible alert-danger">
-                                    <button type="button" class="close" data-dismiss="alert">
-                                        <i class="fa fa-close"></i>
-                                    </button>
-                                    <strong>{{ error|escape }}</strong>
-                                </div>
+                                <div>{{ error|escape }}</div>
                             {% endfor %}
-                        {% endif %}
-                        <div class="form-group">
-                          <label for="id_username">Username</label>
-                          {{ form.username }}
                         </div>
-                        <div class="form-group">
-                          <label for="id_password">Password</label>
-                          {{ form.password }}
-                        </div>
-                        <button type="submit" class="btn btn-primary">Sign in</button>
-                        </form>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="{% url 'workshop_app:register' %}">New around here? Sign up</a>
-                        <a class="dropdown-item" href="{% url 'password_reset' %}">Forgot password?</a>
                     </div>
-                </div>  
+                {% endif %}
+
+                <!-- Login Form -->
+                <form method="post" class="login-form" style="display: flex; flex-direction: column; gap: 16px;">
+                    {% csrf_token %}
+                    
+                    <!-- Username -->
+                    <div class="form-group" style="animation: slideUp 0.5s ease-out;">
+                        <label style="display: flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 500; color: #E8E8FF;">
+                            <span style="font-size: 20px;">👤</span>
+                            Username
+                        </label>
+                        <input type="text" class="form-control" id="id_username" name="username" 
+                               placeholder="Enter your username" required
+                               style="width: 100%; padding: 12px 16px; background: rgba(255, 255, 255, 0.02); border: 2px solid rgba(255, 255, 255, 0.1); border-radius: 8px; color: #E8E8FF; font-size: 14px; transition: all 0.3s ease; backdrop-filter: blur(20px);"
+                               onfocus="this.style.borderColor='#00D9FF'; this.style.boxShadow='0 0 15px rgba(0, 217, 255, 0.3)';"
+                               onblur="this.style.borderColor='rgba(255, 255, 255, 0.1)'; this.style.boxShadow='none';" />
+                    </div>
+
+                    <!-- Password -->
+                    <div class="form-group" style="animation: slideUp 0.5s ease-out 0.1s both;">
+                        <label style="display: flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 500; color: #E8E8FF;">
+                            <span style="font-size: 20px;">🔒</span>
+                            Password
+                        </label>
+                        <input type="password" class="form-control" id="id_password" name="password" 
+                               placeholder="Enter your password" required
+                               style="width: 100%; padding: 12px 16px; background: rgba(255, 255, 255, 0.02); border: 2px solid rgba(255, 255, 255, 0.1); border-radius: 8px; color: #E8E8FF; font-size: 14px; transition: all 0.3s ease; backdrop-filter: blur(20px);"
+                               onfocus="this.style.borderColor='#00D9FF'; this.style.boxShadow='0 0 15px rgba(0, 217, 255, 0.3)';"
+                               onblur="this.style.borderColor='rgba(255, 255, 255, 0.1)'; this.style.boxShadow='none';" />
+                    </div>
+
+                    <!-- Remember & Forgot -->
+                    <div style="display: flex; justify-content: space-between; align-items: center; font-size: 13px; color: rgba(255, 255, 255, 0.6); animation: slideUp 0.5s ease-out 0.2s both;">
+                        <label style="display: flex; align-items: center; gap: 6px; cursor: pointer;">
+                            <input type="checkbox" name="remember_me" style="width: 16px; height: 16px; cursor: pointer; accent-color: #00D9FF;" />
+                            Remember me
+                        </label>
+                        <a href="{% url 'password_reset' %}" style="color: #00D9FF; text-decoration: none; transition: all 0.2s ease; cursor: pointer;" onmouseover="this.style.color='#FF00FF'; this.style.textShadow='0 0 10px rgba(255, 0, 255, 0.5)';" onmouseout="this.style.color='#00D9FF'; this.style.textShadow='none';">Forgot Password?</a>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <button type="submit" class="btn btn-primary" style="width: 100%; padding: 14px 24px; background: linear-gradient(135deg, #00D9FF, rgba(0, 217, 255, 0.6)); border: 2px solid #00D9FF; color: #000000; font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; border-radius: 12px; cursor: pointer; box-shadow: 0 0 20px rgba(0, 217, 255, 0.2); transition: all 0.3s ease; display: flex; align-items: center; justify-content: center; gap: 8px; animation: slideUp 0.5s ease-out 0.3s both;" onmouseover="this.style.transform='scale(1.02)'; this.style.boxShadow='0 0 30px rgba(0, 217, 255, 0.6)';" onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='0 0 20px rgba(0, 217, 255, 0.2)';">
+                        <span>→</span> Sign In
+                    </button>
+                </form>
+
+                <!-- Divider -->
+                <div style="display: flex; align-items: center; gap: 12px; margin: 24px 0; color: rgba(255, 255, 255, 0.2);">
+                    <div style="flex: 1; height: 1px; background: rgba(255, 255, 255, 0.1);"></div>
+                    <span style="font-size: 12px;">or</span>
+                    <div style="flex: 1; height: 1px; background: rgba(255, 255, 255, 0.1);"></div>
+                </div>
+
+                <!-- Register Link -->
+                <a href="{% url 'workshop_app:register' %}" class="btn btn-outline" style="width: 100%; padding: 12px 24px; background: transparent; border: 2px solid #00FF41; color: #00FF41; font-size: 14px; font-weight: 600; border-radius: 12px; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 0 10px rgba(0, 255, 65, 0.1); animation: slideUp 0.5s ease-out 0.4s both; text-align: center; display: inline-flex; align-items: center; justify-content: center; gap: 8px; width: 100%;" onmouseover="this.style.background='rgba(0, 255, 65, 0.05)'; this.style.transform='scale(1.02)'; this.style.boxShadow='0 0 20px rgba(0, 255, 65, 0.4)';" onmouseout="this.style.background='transparent'; this.style.transform='scale(1)'; this.style.boxShadow='0 0 10px rgba(0, 255, 65, 0.1)';">
+                    ✨ Create New Account
+                </a>
             </div>
+
+            <!-- Footer -->
+            <div style="margin-top: 24px; padding-top: 16px; border-top: 1px solid rgba(255, 255, 255, 0.1); text-align: center; font-size: 12px; color: rgba(255, 255, 255, 0.4);">
+                <p>Default credentials for testing: <strong style="color: #00D9FF;">admin / admin123</strong></p>
+                <p>© 2026 FOSSEE Workshops. All rights reserved.</p>
+            </div>
+
         </div>
+
     </div>
+</div>
+
+<style>
+    @keyframes slideUp {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes slideDown {
+        from {
+            opacity: 0;
+            transform: translateY(-20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes floatIn {
+        from {
+            opacity: 0;
+            transform: translateY(10px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .login-form input::placeholder {
+        color: rgba(255, 255, 255, 0.3);
+    }
+</style>
 {% endblock %}

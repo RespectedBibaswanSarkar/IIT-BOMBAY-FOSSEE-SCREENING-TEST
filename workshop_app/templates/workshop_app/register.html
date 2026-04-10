@@ -1,35 +1,185 @@
-{% extends 'workshop_app/base.html' %}
+{% extends 'workshop_app/base_modern.html' %}
 
-	{% block title %}
-		Register
-	{% endblock %}
+{% block title %}
+    Register - FOSSEE Workshops
+{% endblock %}
 
 {% block content %}
+<div class="container-centered" style="min-height: 100vh;">
+    <div style="width: 100%; max-width: 500px; padding: 16px;">
+        
+        <!-- Register Card -->
+        <div class="card glass-card" style="animation: slideUp 0.6s ease-out;">
 
-	<style type="text/css">
-    	label.required::after {
-    	content: "*";
-    	color: red;
-		}
+            <!-- Header -->
+            <div class="card-header" style="justify-content: center; flex-direction: column; text-align: center; border-bottom: 1px solid rgba(255, 255, 255, 0.1);">
+                <div style="font-size: 44px; margin-bottom: 12px; animation: floatIn 0.8s ease-out;">✨</div>
+                <h1 style="font-size: 32px; margin-bottom: 8px; background: linear-gradient(135deg, #00D9FF, #00FF41); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; font-weight: 700;">Create Account</h1>
+                <p style="font-size: 14px; color: rgba(255, 255, 255, 0.6); margin-bottom: 0;">Join FOSSEE to coordinate amazing workshops</p>
+            </div>
 
-		.errorlist {
-      color: red;
+            <!-- Body -->
+            <div class="card-body" style="padding-top: 24px;">
+
+                <!-- Error Messages -->
+                {% if form.non_field_errors %}
+                    <div class="alert alert-error" style="display: flex; align-items: center; gap: 12px; padding: 12px 16px; background: rgba(255, 0, 85, 0.05); border: 2px solid #FF0055; border-radius: 8px; color: #FF0055; margin-bottom: 16px; animation: slideDown 0.3s ease-out;">
+                        <span>⚠️</span>
+                        <div>
+                            {% for error in form.non_field_errors %}
+                                <div>{{ error|escape }}</div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                {% endif %}
+
+                <!-- Registration Form -->
+                <form method="post" class="registration-form" style="display: flex; flex-direction: column; gap: 16px;">
+                    {% csrf_token %}
+
+                    <!-- Name Row -->
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+                        <!-- First Name -->
+                        <div class="form-group" style="animation: slideUp 0.5s ease-out;">
+                            <label style="display: flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 500; color: #E8E8FF;">👤 First</label>
+                            {{ form.first_name }}
+                            {% if form.first_name.errors %}
+                                <span style="font-size: 11px; color: #FF0055; margin-top: 4px;">❌ {{ form.first_name.errors.0 }}</span>
+                            {% endif %}
+                        </div>
+
+                        <!-- Last Name -->
+                        <div class="form-group" style="animation: slideUp 0.5s ease-out 0.05s both;">
+                            <label style="display: flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 500; color: #E8E8FF;">👤 Last</label>
+                            {{ form.last_name }}
+                            {% if form.last_name.errors %}
+                                <span style="font-size: 11px; color: #FF0055; margin-top: 4px;">❌ {{ form.last_name.errors.0 }}</span>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <!-- Email -->
+                    <div class="form-group" style="animation: slideUp 0.5s ease-out 0.1s both;">
+                        <label style="display: flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 500; color: #E8E8FF;">📧 Email Address</label>
+                        {{ form.email }}
+                        {% if form.email.errors %}
+                            <span style="font-size: 12px; color: #FF0055; margin-top: 4px;">❌ {{ form.email.errors.0 }}</span>
+                        {% endif %}
+                    </div>
+
+                    <!-- Username -->
+                    <div class="form-group" style="animation: slideUp 0.5s ease-out 0.15s both;">
+                        <label style="display: flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 500; color: #E8E8FF;">👥 Username</label>
+                        {{ form.username }}
+                        {% if form.username.errors %}
+                            <span style="font-size: 12px; color: #FF0055; margin-top: 4px;">❌ {{ form.username.errors.0 }}</span>
+                        {% endif %}
+                    </div>
+
+                    <!-- Password -->
+                    <div class="form-group" style="animation: slideUp 0.5s ease-out 0.2s both;">
+                        <label style="display: flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 500; color: #E8E8FF;">🔒 Password</label>
+                        {{ form.password1 }}
+                        {% if form.password1.errors %}
+                            <span style="font-size: 12px; color: #FF0055; margin-top: 4px;">❌ {{ form.password1.errors.0 }}</span>
+                        {% endif %}
+                        {% if form.password1.help_text %}
+                            <small style="font-size: 11px; color: rgba(255, 255, 255, 0.5); margin-top: 4px; display: block;">{{ form.password1.help_text|safe }}</small>
+                        {% endif %}
+                    </div>
+
+                    <!-- Confirm Password -->
+                    <div class="form-group" style="animation: slideUp 0.5s ease-out 0.25s both;">
+                        <label style="display: flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 500; color: #E8E8FF;">🔐 Confirm Password</label>
+                        {{ form.password2 }}
+                        {% if form.password2.errors %}
+                            <span style="font-size: 12px; color: #FF0055; margin-top: 4px;">❌ {{ form.password2.errors.0 }}</span>
+                        {% endif %}
+                    </div>
+
+                    <!-- Submit Button -->
+                    <button type="submit" class="btn btn-primary" style="width: 100%; padding: 14px 24px; background: linear-gradient(135deg, #00D9FF, rgba(0, 217, 255, 0.6)); border: 2px solid #00D9FF; color: #000000; font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; border-radius: 12px; cursor: pointer; box-shadow: 0 0 20px rgba(0, 217, 255, 0.2); transition: all 0.3s ease; display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 8px; animation: slideUp 0.5s ease-out 0.3s both;" onmouseover="this.style.transform='scale(1.02)'; this.style.boxShadow='0 0 30px rgba(0, 217, 255, 0.6)';" onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='0 0 20px rgba(0, 217, 255, 0.2)';">
+                        <span>✨</span> Create Account
+                    </button>
+                </form>
+
+                <!-- Login Link -->
+                <div style="margin-top: 20px; text-align: center; color: rgba(255, 255, 255, 0.6); font-size: 14px;">
+                    Already have an account? <a href="{% url 'workshop_app:login' %}" style="color: #00D9FF; text-decoration: none; font-weight: 600; cursor: pointer; transition: all 0.2s ease;" onmouseover="this.style.color='#FF00FF'; this.style.textShadow='0 0 10px rgba(255, 0, 255, 0.5)';" onmouseout="this.style.color='#00D9FF'; this.style.textShadow='none';">Sign In</a>
+                </div>
+            </div>
+
+            <!-- Footer -->
+            <div style="margin-top: 24px; padding-top: 16px; border-top: 1px solid rgba(255, 255, 255, 0.1); text-align: center; font-size: 12px; color: rgba(255, 255, 255, 0.4);">
+                <p>By signing up, you agree to the Terms of Service</p>
+                <p>© 2026 FOSSEE Workshops. All rights reserved.</p>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+<style>
+    @keyframes slideUp {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
     }
-	</style>
 
-	<div class="container" >
-		<br>
-		<h3>Coordinator Registration Form</h3>
-		<br>
-		<form action="" method="post">
-			{% csrf_token %}
-				<table class="table table-bordered">
-					{{ form.as_table }}
-				</table>
+    @keyframes slideDown {
+        from {
+            opacity: 0;
+            transform: translateY(-20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
 
-				<button class="btn btn-primary" type="submit">Register</button>
-		</form><br>
-		<!-- Activate when Instructor registeration starts -->
-		<br>
-	</div>
+    @keyframes floatIn {
+        from {
+            opacity: 0;
+            transform: translateY(10px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .registration-form input {
+        width: 100%;
+        padding: 12px 16px;
+        background: rgba(255, 255, 255, 0.02);
+        border: 2px solid rgba(255, 255, 255, 0.1);
+        border-radius: 8px;
+        color: #E8E8FF;
+        font-size: 14px;
+        transition: all 0.3s ease;
+        backdrop-filter: blur(20px);
+    }
+
+    .registration-form input:focus {
+        outline: none;
+        border-color: #00D9FF;
+        box-shadow: 0 0 15px rgba(0, 217, 255, 0.3);
+        background: rgba(255, 255, 255, 0.03);
+    }
+
+    .registration-form input:invalid {
+        border-color: #FF0055;
+        background: rgba(255, 0, 85, 0.02);
+    }
+
+    .registration-form input::placeholder {
+        color: rgba(255, 255, 255, 0.3);
+    }
+</style>
 {% endblock %}
