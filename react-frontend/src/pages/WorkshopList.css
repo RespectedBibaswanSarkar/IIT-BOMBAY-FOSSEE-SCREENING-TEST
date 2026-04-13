@@ -1,0 +1,141 @@
+.workshops-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 20px;
+}
+
+.page-header {
+    color: white;
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+.page-header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
+
+.page-header p {
+    font-size: 1.1rem;
+    opacity: 0.9;
+}
+
+.no-workshops {
+    background: white;
+    padding: 40px;
+    border-radius: 8px;
+    text-align: center;
+    color: #666;
+    font-size: 1.1rem;
+}
+
+.workshops-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 25px;
+}
+
+.workshop-card {
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.workshop-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.workshop-header {
+    background: linear-gradient(135deg, #1a237e 0%, #3949ab 100%);
+    color: white;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+    gap: 10px;
+}
+
+.workshop-header h3 {
+    font-size: 1.2rem;
+    margin: 0;
+    flex: 1;
+}
+
+.status {
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+.status.active {
+    background: #4caf50;
+}
+
+.status.upcoming {
+    background: #2196f3;
+}
+
+.status.completed {
+    background: #9e9e9e;
+}
+
+.workshop-description {
+    color: #666;
+    padding: 0;
+    margin: 0;
+}
+
+.workshop-details {
+    padding: 15px 20px;
+    border-top: 1px solid #eee;
+    flex: 1;
+}
+
+.detail {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    font-size: 0.95rem;
+}
+
+.detail .label {
+    color: #999;
+}
+
+.detail .value {
+    color: #333;
+    font-weight: 500;
+}
+
+.workshop-card>* {
+    flex: 0;
+}
+
+.workshop-card .workshop-description {
+    padding: 15px 20px;
+    margin: 0;
+}
+
+.btn-view {
+    display: block;
+    background: #ff7a00;
+    color: white;
+    text-align: center;
+    padding: 12px;
+    text-decoration: none;
+    transition: background 0.3s ease;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.btn-view:hover {
+    background: #e66a00;
+}
