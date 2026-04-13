@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="FOSSEE Workshop Booking System - Modern Glassmorphism Design">
+    <title>
+        {% block title %}
+            FOSSEE Workshops
+        {% endblock %}
+    </title>
+
+    <!-- Modern Glassmorphism CSS -->
+    <link rel="stylesheet" href="{% static 'workshop_app/css/modern-glassmorphism.css' %}" type="text/css"/>
+    
+    <!-- Material Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    {% block extra-dependencies %}
+    {% endblock %}
+
+</head>
+
+<body style="background: linear-gradient(135deg, #0A0E27 0%, #1A1F3A 50%, #0A0E27 100%); background-attachment: fixed;">
+
+<!-- Navigation Bar -->
+{% block header %}
+    <nav class="navbar" style="position: fixed; top: 0; width: 100%; background: rgba(10, 14, 39, 0.8); border-bottom: 1px solid rgba(0, 217, 255, 0.15); backdrop-filter: blur(20px); box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); z-index: 100; animation: slideDown 0.5s ease-out;">
+        <div class="nav-container" style="max-width: 1200px; margin: 0 auto; padding: 16px 24px; display: flex; align-items: center; justify-content: space-between; gap: 24px; width: 100%;">
+            
+            <!-- Brand -->
+            <a class="nav-brand" href="{% url 'workshop_app:index' %}" style="display: flex; align-items: center; gap: 12px; font-size: 20px; font-weight: 700; color: #00D9FF; text-decoration: none; animation: slideLeft 0.6s ease-out;">
+                <span style="font-size: 28px;">🎓</span>
+                FOSSEE
+            </a>
+
+            <!-- Menu -->
+            <ul class="nav-menu" style="display: flex; align-items: center; gap: 24px; list-style: none; flex: 1; justify-content: center;">
+                {% if user.is_authenticated %}
+                <li style="animation: slideDown 0.5s ease-out;"><a class="nav-link" href="/" style="display: flex; align-items: center; gap: 6px; padding: 8px 16px; color: rgba(255, 255, 255, 0.7); text-decoration: none; border-radius: 8px; transition: all 0.3s ease; position: relative;">🏠 Home</a></li>
+                <li style="animation: slideDown 0.5s ease-out;"><a class="nav-link" href="{% url 'statistics_app:public' %}" style="display: flex; align-items: center; gap: 6px; padding: 8px 16px; color: rgba(255, 255, 255, 0.7); text-decoration: none; border-radius: 8px; transition: all 0.3s ease; position: relative;">📊 Statistics</a></li>
+                {% endif %}
+            </ul>
+
+            <!-- User Actions -->
+            <div class="nav-actions" style="display: flex; align-items: center; gap: 12px;">
+                {% if user.is_authenticated %}
+                <div class="dropdown" style="position: relative; display: inline-block;">
+                    <button class="dropdown-toggle" style="background: transparent; border: none; color: #E8E8FF; cursor: pointer; display: flex; align-items: center; gap: 8px; padding: 8px 16px; border-radius: 8px; transition: all 0.3s ease; font-size: 14px; font-weight: 500;" onclick="this.parentElement.classList.toggle('open');">
+                        👤 {{ user.username }}
+                    </button>
+                    <ul class="dropdown-menu" style="position: absolute; top: 100%; right: 0; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 12px; backdrop-filter: blur(20px); box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5); min-width: 180px; margin-top: 8px; opacity: 0; visibility: hidden; transform: translateY(-10px); transition: all 0.3s ease; z-index: 1000; list-style: none;">
+                        <li><a href="/admin/" style="display: flex; align-items: center; gap: 8px; padding: 12px 16px; color: #E8E8FF; text-decoration: none; transition: all 0.2s ease;">⚙️ Admin Panel</a></li>
+                        <li><a href="{% url 'password_change' %}" style="display: flex; align-items: center; gap: 8px; padding: 12px 16px; color: #E8E8FF; text-decoration: none; transition: all 0.2s ease;">🔐 Change Password</a></li>
+                        <li><a href="{% url 'workshop_app:logout' %}" style="display: flex; align-items: center; gap: 8px; padding: 12px 16px; color: #FF0055; text-decoration: none; transition: all 0.2s ease;">🚪 Logout</a></li>
+                    </ul>
+                </div>
+                {% else %}
+                <a href="{% url 'workshop_app:login' %}" class="btn btn-primary" style="padding: 10px 20px; background: linear-gradient(135deg, #00D9FF, rgba(0, 217, 255, 0.6)); border: 2px solid #00D9FF; color: #000000; font-size: 13px; font-weight: 600; border-radius: 8px; cursor: pointer; text-decoration: none; display: flex; align-items: center; gap: 6px; transition: all 0.3s ease;">🔑 Login</a>
+                {% endif %}
+            </div>
+        </div>
+    </nav>
+{% endblock %}
+
+<!-- Main Content -->
+<div class="base-content" style="padding-top: 64px; min-height: 100vh;">
+    {% block content %}
+        <div class="container" style="margin-top: 50px; text-align: center;">
+            <h1>Welcome to FOSSEE Workshops</h1>
+            <p>Please customize this template by extending this base template</p>
+        </div>
+    {% endblock %}
+</div>
+
+<!-- Footer -->
+<footer class="footer" style="background: rgba(10, 14, 39, 0.8); border-top: 1px solid rgba(255, 255, 255, 0.1); padding: 32px 24px; margin-top: 64px; text-align: center; color: rgba(255, 255, 255, 0.4); font-size: 12px;">
+    {% block footer %}
+        <div class="container" style="max-width: 1200px; margin: 0 auto;">
+            <p>&copy; 2026 FOSSEE Workshops. All rights reserved.</p>
+            <p>Built with <span style="color: #FF0055;">❤️</span> using Django + React</p>
+        </div>
+    {% endblock %}
+</footer>
+
+<!-- Dropdown Toggle Script -->
+<script>
+    document.addEventListener('click', function(event) {
+        const dropdowns = document.querySelectorAll('.dropdown');
+        dropdowns.forEach(dropdown => {
+            if (!dropdown.contains(event.target)) {
+                dropdown.classList.remove('open');
+            }
+        });
+    });
+
+    // Dropdown Menu Hover for Desktop
+    document.querySelectorAll('.dropdown-menu li a').forEach(link => {
+        link.addEventListener('mouseenter', function() {
+            this.style.background = 'rgba(255, 255, 255, 0.05)';
+            this.style.color = '#00D9FF';
+            this.style.paddingLeft = '20px';
+        });
+        link.addEventListener('mouseleave', function() {
+            this.style.background = 'transparent';
+            this.style.color = '#E8E8FF';
+            this.style.paddingLeft = '16px';
+        });
+    });
+</script>
+
+<style>
+    @keyframes slideDown {
+        from {
+            opacity: 0;
+            transform: translateY(-20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes slideLeft {
+        from {
+            opacity: 0;
+            transform: translateX(-30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    }
+
+    body {
+        min-height: 100vh;
+    }
+</style>
+
+{% block extra-custom-scripts %}
+{% endblock %}
+
+</body>
+</html>

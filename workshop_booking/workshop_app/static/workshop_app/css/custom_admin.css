@@ -1,0 +1,138 @@
+/* ============================================================================
+   CUSTOM ADMIN CSS - FOSSEE Workshop System
+   Theme: Neon Orange + Deep Blue (Modern Dark Mode)
+   ============================================================================ */
+
+/* Root Variables */
+:root {
+  --admin-orange: #FF7D00;
+  --admin-blue: #0A0E27;
+  --admin-blue-light: #1A1F3A;
+  --admin-text: #E8E8FF;
+  --admin-glass: rgba(255, 255, 255, 0.05);
+}
+
+/* Base Body & Layout */
+body {
+    background: var(--admin-blue) !important;
+    color: var(--admin-text) !important;
+    font-family: 'Roboto', sans-serif !important;
+}
+
+/* Header */
+#header {
+    background: var(--admin-blue-light) !important;
+    border-bottom: 2px solid var(--admin-orange) !important;
+    padding: 12px 24px !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4) !important;
+}
+
+#branding h1 {
+    color: var(--admin-orange) !important;
+    font-weight: 800 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 1px !important;
+}
+
+#branding h1 a {
+    color: var(--admin-orange) !important;
+}
+
+/* Sidebar & Navigation */
+#content {
+    background: transparent !important;
+}
+
+.module {
+    background: var(--admin-glass) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    border-radius: 12px !important;
+    backdrop-filter: blur(20px) !important;
+    margin-bottom: 24px !important;
+    overflow: hidden !important;
+}
+
+.module h2, .module caption, .inline-group h2 {
+    background: rgba(255, 125, 0, 0.1) !important;
+    color: var(--admin-orange) !important;
+    font-weight: 700 !important;
+    border-bottom: 1px solid rgba(255, 125, 0, 0.2) !important;
+}
+
+/* Buttons */
+.button, input[type=submit], input[type=button], .submit-row input, a.button {
+    background: linear-gradient(135deg, var(--admin-orange), rgba(255, 125, 0, 0.7)) !important;
+    color: #000 !important;
+    border: none !important;
+    border-radius: 8px !important;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+    padding: 10px 20px !important;
+    transition: all 0.3s ease !important;
+    box-shadow: 0 0 15px rgba(255, 125, 0, 0.2) !important;
+}
+
+.button:hover, input[type=submit]:hover, input[type=button]:hover {
+    transform: scale(1.02) !important;
+    box-shadow: 0 0 25px rgba(255, 125, 0, 0.4) !important;
+}
+
+/* Table Headings */
+table thead th {
+    background: rgba(255, 255, 255, 0.03) !important;
+    color: var(--admin-orange) !important;
+    font-weight: 700 !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+/* Inputs */
+input[type=text], input[type=password], input[type=email], input[type=url], input[type=number], textarea, select {
+    background: rgba(255, 255, 255, 0.03) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    border-radius: 6px !important;
+    color: #fff !important;
+    padding: 8px 12px !important;
+}
+
+input[type=text]:focus, input[type=password]:focus {
+    border-color: var(--admin-orange) !important;
+    box-shadow: 0 0 10px rgba(255, 125, 0, 0.2) !important;
+    outline: none !important;
+}
+
+/* Breadcrumbs */
+.breadcrumbs {
+    background: transparent !important;
+    color: #8888A0 !important;
+    padding: 16px 0 !important;
+    border: none !important;
+}
+
+.breadcrumbs a {
+    color: var(--admin-orange) !important;
+}
+
+/* Specific Fixes */
+#changelist {
+    background: transparent !important;
+}
+
+#changelist-filter {
+    background: var(--admin-glass) !important;
+    border-left: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+#changelist-filter h2 {
+    background: var(--admin-orange) !important;
+    color: #000 !important;
+}
+
+.object-tools a {
+    background: rgba(255, 255, 255, 0.05) !important;
+    border: 1px solid var(--admin-orange) !important;
+    color: var(--admin-orange) !important;
+}
+
+.object-tools a:hover {
+    background: rgba(255, 125, 0, 0.1) !important;
+}

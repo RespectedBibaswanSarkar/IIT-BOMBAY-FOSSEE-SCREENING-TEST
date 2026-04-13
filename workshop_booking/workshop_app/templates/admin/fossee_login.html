@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="FOSSEE Admin Login - Modern Material Design">
+    <title>FOSSEE Admin Login</title>
+
+    <!-- Modern Theme -->
+    <link rel="stylesheet" href="{% static 'workshop_app/css/fossee-theme.css' %}">
+    <link rel="stylesheet" href="{% static 'workshop_app/css/components.css' %}">
+    <link rel="stylesheet" href="{% static 'workshop_app/css/animations.css' %}">
+    
+    <!-- Material Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        html, body {
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #0F1219 0%, #1a1a2e 50%, #0F1219 100%);
+            background-attachment: fixed;
+        }
+
+        .login-container {
+            width: 100%;
+            max-width: 420px;
+            padding: 20px;
+            animation: scaleIn 0.6s ease-out;
+        }
+
+        .login-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.01) 100%);
+            border: 1px solid rgba(255, 122, 0, 0.15);
+            border-radius: 20px;
+            padding: 48px;
+            backdrop-filter: blur(20px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
+        }
+
+        .login-header {
+            text-align: center;
+            margin-bottom: 32px;
+            animation: slideDown 0.6s ease-out;
+        }
+
+        .login-logo {
+            font-size: 3rem;
+            margin-bottom: 16px;
+            animation: slideDown 0.7s ease-out;
+        }
+
+        .login-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #FF7A00, #FF8C1F);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 8px;
+            animation: slideDown 0.8s ease-out;
+        }
+
+        .login-subtitle {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            animation: slideUp 0.6s ease-out;
+            animation-delay: 100ms;
+            animation-fill-mode: both;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            animation: slideUp 0.6s ease-out;
+        }
+
+        .form-group:nth-child(1) { animation-delay: 200ms; }
+        .form-group:nth-child(2) { animation-delay: 300ms; }
+
+        .form-label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 500;
+            margin-bottom: 8px;
+            color: var(--text-primary);
+            font-size: 0.9rem;
+        }
+
+        .form-label span {
+            color: var(--color-error);
+            font-size: 1.2rem;
+        }
+
+        .form-input-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 12px 16px 12px 40px;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 10px;
+            color: var(--text-primary);
+            font-size: 1rem;
+            font-family: inherit;
+            transition: all 0.3s ease;
+        }
+
+        .form-input::placeholder {
+            color: var(--text-muted);
+        }
+
+        .form-input:focus {
+            background: var(--glass-bg-hover);
+            border-color: var(--color-orange-primary);
+            box-shadow: 
+                inset 0 0 0 1px var(--color-orange-primary),
+                0 0 0 3px rgba(255, 122, 0, 0.2);
+        }
+
+        .input-icon {
+            position: absolute;
+            left: 12px;
+            color: var(--color-orange-primary);
+            font-size: 1.2rem;
+            pointer-events: none;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 24px;
+            animation: slideUp 0.6s ease-out;
+            animation-delay: 400ms;
+            animation-fill-mode: both;
+        }
+
+        .checkbox-group input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+            accent-color: var(--color-orange-primary);
+        }
+
+        .checkbox-group label {
+            cursor: pointer;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            flex: 1;
+        }
+
+        .forgot-password {
+            text-align: right;
+            font-size: 0.9rem;
+        }
+
+        .forgot-password a {
+            color: var(--color-orange-primary);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .forgot-password a:hover {
+            color: var(--color-orange-bright);
+            text-shadow: var(--glow-orange-subtle);
+        }
+
+        .login-button {
+            width: 100%;
+            padding: 12px 24px;
+            background: linear-gradient(135deg, var(--color-orange-primary), var(--color-orange-bright));
+            border: none;
+            border-radius: 10px;
+            color: #FFFFFF;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: var(--elevation-2);
+            position: relative;
+            overflow: hidden;
+            animation: slideUp 0.6s ease-out;
+            animation-delay: 500ms;
+            animation-fill-mode: both;
+        }
+
+        .login-button::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            transform: translate(-50%, -50%);
+            transition: all 0.3s ease;
+            z-index: 1;
+        }
+
+        .login-button:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .login-button:hover {
+            background: linear-gradient(135deg, var(--color-orange-bright), var(--color-orange-vivid));
+            box-shadow: var(--glow-orange);
+            transform: translateY(-2px);
+        }
+
+        .login-button:active {
+            transform: translateY(0);
+            box-shadow: var(--elevation-1);
+        }
+
+        .error-message {
+            background: rgba(255, 0, 85, 0.1);
+            border-left: 4px solid var(--color-error);
+            color: var(--color-error);
+            padding: 12px 16px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-size: 0.9rem;
+            animation: slideDown 0.4s ease-out;
+        }
+
+        .success-message {
+            background: rgba(0, 255, 65, 0.1);
+            border-left: 4px solid var(--color-success);
+            color: var(--color-success);
+            padding: 12px 16px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-size: 0.9rem;
+            animation: slideDown 0.4s ease-out;
+        }
+
+        .login-footer {
+            text-align: center;
+            margin-top: 24px;
+            padding-top: 24px;
+            border-top: 1px solid rgba(255, 122, 0, 0.1);
+            color: var(--text-tertiary);
+            font-size: 0.85rem;
+            animation: fadeIn 0.8s ease-out;
+            animation-delay: 600ms;
+            animation-fill-mode: both;
+        }
+
+        .login-footer a {
+            color: var(--color-orange-primary);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .login-footer a:hover {
+            color: var(--color-orange-bright);
+        }
+
+        /* Responsive */
+        @media (max-width: 480px) {
+            .login-card {
+                padding: 32px 24px;
+            }
+
+            .login-title {
+                font-size: 1.5rem;
+            }
+
+            .login-logo {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div class="login-container">
+        <div class="login-card">
+            
+            <!-- Header -->
+            <div class="login-header">
+                <div class="login-logo">🎓</div>
+                <h1 class="login-title">FOSSEE Admin</h1>
+                <p class="login-subtitle">Workshop Booking System</p>
+            </div>
+
+            <!-- Login Form -->
+            <form method="POST" action="{% url 'admin:login' %}">
+                {% csrf_token %}
+
+                <!-- Error Messages -->
+                {% if form.non_field_errors %}
+                    <div class="error-message">
+                        <strong>Login Failed!</strong><br>
+                        {% for error in form.non_field_errors %}
+                            {{ error }}<br>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+
+                <!-- Username Field -->
+                <div class="form-group">
+                    <label for="id_username" class="form-label">
+                        <span class="material-icons" style="font-size: 1rem;">person</span>
+                        Username
+                        <span>*</span>
+                    </label>
+                    <div class="form-input-wrapper">
+                        <span class="material-icons input-icon">account_circle</span>
+                        <input
+                            type="text"
+                            id="id_username"
+                            name="username"
+                            class="form-input"
+                            placeholder="Enter your username"
+                            required
+                            autofocus
+                            autocomplete="username"
+                        />
+                    </div>
+                    {% if form.username.errors %}
+                        <div class="error-message" style="margin-top: 8px;">
+                            {{ form.username.errors.0 }}
+                        </div>
+                    {% endif %}
+                </div>
+
+                <!-- Password Field -->
+                <div class="form-group">
+                    <label for="id_password" class="form-label">
+                        <span class="material-icons" style="font-size: 1rem;">lock</span>
+                        Password
+                        <span>*</span>
+                    </label>
+                    <div class="form-input-wrapper">
+                        <span class="material-icons input-icon">lock</span>
+                        <input
+                            type="password"
+                            id="id_password"
+                            name="password"
+                            class="form-input"
+                            placeholder="Enter your password"
+                            required
+                            autocomplete="current-password"
+                        />
+                    </div>
+                    {% if form.password.errors %}
+                        <div class="error-message" style="margin-top: 8px;">
+                            {{ form.password.errors.0 }}
+                        </div>
+                    {% endif %}
+                </div>
+
+                <!-- Remember Me & Forgot Password -->
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px;">
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="remember" name="remember_me">
+                        <label for="remember">Remember me</label>
+                    </div>
+                    <div class="forgot-password">
+                        <a href="/admin/password_reset/">Forgot password?</a>
+                    </div>
+                </div>
+
+                <!-- Submit Button -->
+                <button type="submit" class="login-button">
+                    <span style="position: relative; z-index: 2; display: flex; align-items: center; gap: 8px; justify-content: center;">
+                        <span class="material-icons" style="font-size: 1.2rem;">login</span>
+                        <span>Sign In to Admin Panel</span>
+                    </span>
+                </button>
+
+            </form>
+
+            <!-- Footer -->
+            <div class="login-footer">
+                <p style="margin: 0;">
+                    FOSSEE Workshop Booking System v2.0<br>
+                    Modern UI with Material Design 3
+                </p>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="{% static 'workshop_app/js/scrollAnimations.js' %}"></script>
+    <script>
+        // Add animation to form on load
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('✓ Admin Login page loaded');
+            
+            // Focus animation
+            const inputs = document.querySelectorAll('.form-input');
+            inputs.forEach(input => {
+                input.addEventListener('focus', function() {
+                    this.parentElement.style.boxShadow = '0 0 0 3px rgba(255, 122, 0, 0.2)';
+                });
+                input.addEventListener('blur', function() {
+                    this.parentElement.style.boxShadow = 'none';
+                });
+            });
+        });
+    </script>
+
+</body>
+
+</html>

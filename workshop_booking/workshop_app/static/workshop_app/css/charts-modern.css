@@ -1,0 +1,378 @@
+/* ============================================================
+   CHART.JS 4.x - NEON STYLED CHARTS
+   Modern Charts with Neon Orange & Deep Blue Theme
+   ============================================================ */
+
+/* Chart Container Styling */
+.chart-container {
+    position: relative;
+    background: linear-gradient(135deg, rgba(28, 34, 64, 0.8) 0%, rgba(42, 90, 127, 0.8) 100%);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 107, 53, 0.3);
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: 0 0 20px rgba(255, 107, 53, 0.1), 0 8px 16px rgba(0, 0, 0, 0.3);
+    margin: 1.5rem 0;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.chart-container:hover {
+    border-color: #FF6B35;
+    box-shadow: 0 0 30px rgba(255, 107, 53, 0.3), 0 12px 24px rgba(0, 0, 0, 0.3);
+}
+
+.chart-container canvas {
+    max-height: 400px;
+    animation: fade-in 0.8s ease-out;
+}
+
+/* Chart Legend Styling */
+.chart-legend {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(255, 107, 53, 0.2);
+}
+
+.chart-legend-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #B8C5D6;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.chart-legend-color {
+    width: 12px;
+    height: 12px;
+    border-radius: 3px;
+    box-shadow: 0 0 10px currentColor;
+}
+
+/* Chart Title */
+.chart-title {
+    color: #FF6B35;
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-shadow: 0 0 10px rgba(255, 107, 53, 0.3);
+}
+
+.chart-subtitle {
+    color: #B8C5D6;
+    font-size: 0.85rem;
+    margin-top: 0.5rem;
+    font-weight: 400;
+}
+
+/* Chart Grid & Axis Styling */
+.chart-grid {
+    color: rgba(255, 107, 53, 0.2);
+}
+
+.chart-axis {
+    color: #8B96A8;
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+/* Responsive Chart Container */
+@media (max-width: 768px) {
+    .chart-container {
+        padding: 1rem;
+    }
+
+    .chart-container canvas {
+        max-height: 300px;
+    }
+
+    .chart-legend {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .chart-title {
+        font-size: 1.1rem;
+    }
+}
+
+/* Chart Type Specific Styles */
+
+/* Bar Chart */
+.bar-chart-container {
+    position: relative;
+    height: 300px;
+    margin: 2rem 0;
+}
+
+/* Line Chart */
+.line-chart-container {
+    position: relative;
+    height: 350px;
+    margin: 2rem 0;
+}
+
+/* Pie/Doughnut Chart */
+.pie-chart-container {
+    position: relative;
+    height: 300px;
+    margin: 2rem 0;
+}
+
+/* Radar Chart */
+.radar-chart-container {
+    position: relative;
+    height: 350px;
+    margin: 2rem 0;
+}
+
+/* Statistics Card with Mini Chart */
+.stats-card-with-chart {
+    background: linear-gradient(135deg, rgba(28, 34, 64, 0.8) 0%, rgba(42, 90, 127, 0.8) 100%);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 107, 53, 0.3);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin: 1rem 0;
+}
+
+.stats-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.stats-card-title {
+    color: #FF6B35;
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.stats-card-value {
+    color: #FFFFFF;
+    font-size: 2rem;
+    font-weight: 700;
+    margin: 0.5rem 0;
+}
+
+.stats-card-change {
+    color: #00FF41;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.stats-card-change.negative {
+    color: #FF006E;
+}
+
+/* Animation for chart loading */
+@keyframes chart-slide-in {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.chart-container.loading {
+    animation: chart-slide-in 0.6s ease-out;
+}
+
+/* Loading skeleton for charts */
+.chart-skeleton {
+    background: linear-gradient(90deg, rgba(255, 107, 53, 0.1), rgba(255, 107, 53, 0.2), rgba(255, 107, 53, 0.1));
+    background-size: 200% 100%;
+    animation: loading-shimmer 2s infinite;
+    border-radius: 8px;
+    height: 300px;
+    margin: 2rem 0;
+}
+
+@keyframes loading-shimmer {
+    0% {
+        background-position: 200% 0;
+    }
+    100% {
+        background-position: -200% 0;
+    }
+}
+
+/* Chart Tooltip Custom Styling */
+.chartjs-tooltip {
+    background: rgba(15, 35, 51, 0.95);
+    border: 1px solid #FF6B35;
+    border-radius: 8px;
+    padding: 0.75rem 1rem;
+    color: white;
+    font-size: 0.85rem;
+    font-weight: 600;
+    box-shadow: 0 0 20px rgba(255, 107, 53, 0.5);
+    backdrop-filter: blur(10px);
+    pointer-events: none;
+    z-index: 100;
+}
+
+.chartjs-tooltip::before {
+    content: '';
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background: #FF6B35;
+    border-radius: 50%;
+    box-shadow: 0 0 10px #FF6B35;
+}
+
+/* Comparison Chart Layout */
+.chart-comparison {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin: 2rem 0;
+}
+
+@media (max-width: 768px) {
+    .chart-comparison {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Chart Filter/Control Area */
+.chart-controls {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.chart-control-btn {
+    background: rgba(255, 107, 53, 0.15);
+    border: 1px solid rgba(255, 107, 53, 0.3);
+    color: #FF6B35;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.chart-control-btn:hover {
+    background: rgba(255, 107, 53, 0.3);
+    box-shadow: 0 0 15px rgba(255, 107, 53, 0.3);
+}
+
+.chart-control-btn.active {
+    background: linear-gradient(135deg, #FF6B35, #FF8A50);
+    color: white;
+    border-color: #FF6B35;
+    box-shadow: 0 0 20px rgba(255, 107, 53, 0.5);
+}
+
+/* Export Chart Button */
+.chart-export-btn {
+    background: linear-gradient(135deg, #FF6B35 0%, #FF8A50 100%);
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 600;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    box-shadow: 0 0 15px rgba(255, 107, 53, 0.3);
+}
+
+.chart-export-btn:hover {
+    box-shadow: 0 0 25px rgba(255, 107, 53, 0.5);
+    transform: translateY(-2px);
+}
+
+/* Data Table Below Chart */
+.chart-data-table {
+    width: 100%;
+    margin-top: 1.5rem;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+}
+
+.chart-data-table th {
+    background: linear-gradient(90deg, #FF6B35 0%, #FF8A50 100%);
+    color: white;
+    padding: 0.75rem;
+    text-align: left;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.chart-data-table td {
+    padding: 0.75rem;
+    border-bottom: 1px solid rgba(255, 107, 53, 0.1);
+    color: #B8C5D6;
+}
+
+.chart-data-table tr:hover {
+    background: rgba(255, 107, 53, 0.1);
+}
+
+/* Chart Animation Utilities */
+.chart-fade-in {
+    animation: fade-in 0.8s ease-out;
+}
+
+.chart-slide-up {
+    animation: slide-up 0.8s ease-out;
+}
+
+@keyframes slide-up {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* No Data Message */
+.chart-no-data {
+    background: linear-gradient(135deg, rgba(28, 34, 64, 0.8) 0%, rgba(42, 90, 127, 0.8) 100%);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 107, 53, 0.3);
+    border-radius: 12px;
+    padding: 3rem;
+    text-align: center;
+    color: #8B96A8;
+    font-size: 1rem;
+}
+
+.chart-no-data-icon {
+    font-size: 3rem;
+    color: #FF6B35;
+    opacity: 0.5;
+    margin-bottom: 1rem;
+}
+
+.chart-no-data-text {
+    font-weight: 500;
+    margin-bottom: 1rem;
+}
+
+.chart-no-data-hint {
+    font-size: 0.85rem;
+    color: #8B96A8;
+}

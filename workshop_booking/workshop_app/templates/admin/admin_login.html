@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="FOSSEE Admin Portal Login">
+    <title>Admin Login - FOSSEE</title>
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Material Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Modern Neon Theme CSS -->
+    <link rel="stylesheet" href="{% static 'workshop_app/css/neon-theme.css' %}" type="text/css"/>
+    <link rel="stylesheet" href="{% static 'workshop_app/css/animations.css' %}" type="text/css"/>
+
+    <style>
+        * {
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0F2333 0%, #1A3A52 50%, #0F2333 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Animated Background */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 20% 50%, rgba(255, 107, 53, 0.1) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 80%, rgba(0, 217, 255, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .admin-login-container {
+            width: 100%;
+            max-width: 450px;
+            padding: 20px;
+            position: relative;
+            z-index: 10;
+            animation: slideUp 0.6s ease-out;
+        }
+
+        /* Admin Badge */
+        .admin-badge {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 30px;
+            animation: slideDown 0.5s ease-out;
+        }
+        
+        .admin-badge-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border-radius: 15px;
+            padding: 15px 20px;
+            background: rgba(255, 0, 110, 0.05);
+        }
+        
+        .admin-badge-link:hover {
+            background: rgba(255, 0, 110, 0.15);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(255, 0, 110, 0.2);
+        }
+
+        .admin-badge-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #FF006E, #FF1493);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            box-shadow: 0 0 30px rgba(255, 0, 110, 0.5);
+            color: white;
+        }
+
+        .admin-badge-text h1 {
+            font-size: 28px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #FF006E, #FF6B35);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin: 0;
+            text-shadow: 0 0 30px rgba(255, 0, 110, 0.3);
+        }
+
+        .admin-badge-text p {
+            font-size: 12px;
+            color: #8B96A8;
+            margin: 0;
+            font-weight: 500;
+        }
+
+        /* Login Card */
+        .login-card {
+            background: linear-gradient(135deg, rgba(26, 58, 82, 0.8), rgba(42, 90, 127, 0.6));
+            border: 2px solid #FF006E;
+            border-radius: 20px;
+            padding: 40px;
+            backdrop-filter: blur(20px);
+            box-shadow: 0 20px 60px rgba(255, 0, 110, 0.2),
+                        0 0 60px rgba(255, 107, 53, 0.1);
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        .login-card-header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid rgba(255, 0, 110, 0.3);
+        }
+
+        .login-card-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: #E8E8FF;
+            margin-bottom: 8px;
+        }
+
+        .login-card-subtitle {
+            font-size: 13px;
+            color: #8B96A8;
+        }
+
+        /* Form Elements */
+        .form-group {
+            margin-bottom: 24px;
+            animation: slideUp 0.5s ease-out forwards;
+        }
+
+        .form-group:nth-of-type(1) { animation-delay: 0.2s; }
+        .form-group:nth-of-type(2) { animation-delay: 0.3s; }
+        .form-group:nth-of-type(3) { animation-delay: 0.4s; }
+
+        .form-label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            color: #E8E8FF;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .form-label .material-icons {
+            font-size: 18px;
+            color: #FF006E;
+        }
+
+        .form-control {
+            background: rgba(255, 255, 255, 0.03);
+            border: 2px solid rgba(255, 0, 110, 0.3);
+            border-radius: 12px;
+            padding: 14px 16px;
+            color: #E8E8FF;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .form-control::placeholder {
+            color: rgba(255, 255, 255, 0.3);
+        }
+
+        .form-control:focus {
+            background: rgba(255, 0, 110, 0.05);
+            border-color: #FF006E;
+            box-shadow: 0 0 20px rgba(255, 0, 110, 0.3);
+            outline: none;
+            color: #E8E8FF;
+        }
+
+        /* Alert Messages */
+        .alert-danger {
+            background: rgba(255, 0, 110, 0.1);
+            border: 2px solid #FF006E;
+            color: #FF6B9D;
+            border-radius: 12px;
+            padding: 14px;
+            font-size: 13px;
+            margin-bottom: 20px;
+            animation: slideDown 0.4s ease-out;
+        }
+
+        /* Checkboxes */
+        .form-check {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 13px;
+            color: #8B96A8;
+        }
+
+        .form-check-input {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+            accent-color: #FF006E;
+            border-color: rgba(255, 0, 110, 0.5);
+        }
+
+        /* Links */
+        .forgot-password-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: #00D9FF;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .forgot-password-link:hover {
+            color: #FF006E;
+            text-shadow: 0 0 10px rgba(255, 0, 110, 0.5);
+        }
+
+        /* Submit Button */
+        .btn-submit {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, #FF006E, #FF1493);
+            border: 2px solid #FF006E;
+            color: white;
+            font-size: 14px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            box-shadow: 0 0 20px rgba(255, 0, 110, 0.3);
+            margin-top: 20px;
+            animation: slideUp 0.5s ease-out 0.5s both;
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(255, 0, 110, 0.5);
+            background: linear-gradient(135deg, #FF1493, #FF006E);
+        }
+
+        .btn-submit:active {
+            transform: translateY(-1px);
+        }
+
+        /* Divider */
+        .divider {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin: 30px 0;
+            color: rgba(255, 255, 255, 0.2);
+        }
+
+        .divider-line {
+            flex: 1;
+            height: 1px;
+            background: rgba(255, 0, 110, 0.2);
+        }
+
+        .divider-text {
+            font-size: 12px;
+            color: #8B96A8;
+        }
+
+        /* Back Link */
+        .back-to-home {
+            text-align: center;
+            margin-top: 30px;
+            animation: slideUp 0.5s ease-out 0.6s both;
+        }
+
+        .back-to-home a {
+            color: #00D9FF;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            transition: all 0.3s ease;
+        }
+
+        .back-to-home a:hover {
+            color: #FF006E;
+            gap: 10px;
+        }
+
+        /* Security Badge */
+        .security-badge {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            font-size: 11px;
+            color: #00FF41;
+            margin-top: 20px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            animation: pulse-grow 2s ease-in-out infinite;
+        }
+
+        .security-badge .material-icons {
+            font-size: 14px;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes pulse-grow {
+            0%, 100% {
+                opacity: 0.6;
+            }
+            50% {
+                opacity: 1;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .admin-login-container {
+                padding: 15px;
+            }
+
+            .login-card {
+                padding: 25px;
+            }
+
+            .admin-badge-icon {
+                width: 50px;
+                height: 50px;
+                font-size: 24px;
+            }
+
+            .admin-badge-text h1 {
+                font-size: 22px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="admin-login-container">
+        <!-- Admin Badge -->
+        <a href="/" class="admin-badge admin-badge-link">
+            <svg width="120" height="40" viewBox="0 0 140 50" fill="none" xmlns="http://www.w3.org/2000/svg" style="filter: drop-shadow(0 0 10px rgba(255, 0, 110, 0.3)); transition: all 0.3s ease; margin-right: 10px;" onmouseover="this.style.filter='drop-shadow(0 0 20px rgba(255, 0, 110, 0.6))'" onmouseout="this.style.filter='drop-shadow(0 0 10px rgba(255, 0, 110, 0.3))'">
+              <rect width="140" height="8" fill="#FF006E"/>
+              <text x="10" y="38" font-family="Poppins, sans-serif" font-size="28" font-weight="800" fill="#FF006E" letter-spacing="2">FOSSEE</text>
+              <text x="12" y="48" font-family="Poppins, sans-serif" font-size="9" fill="#8B96A8" letter-spacing="1">better education</text>
+            </svg>
+            <div class="admin-badge-text">
+                <h1>Admin Portal</h1>
+                <p>FOSSEE Management System</p>
+            </div>
+        </a>
+
+        <!-- Login Card -->
+        <div class="login-card">
+            <!-- Card Header -->
+            <div class="login-card-header">
+                <h2 class="login-card-title">Admin Login</h2>
+                <p class="login-card-subtitle">Enter your credentials to access the admin dashboard</p>
+            </div>
+
+            <!-- Error Messages -->
+            {% if form.errors or login_failed %}
+                <div class="alert-danger">
+                    <div style="display: flex; align-items: center; gap: 10px;">
+                        <span class="material-icons" style="font-size: 18px;">error</span>
+                        <div>
+                            {% if form.errors %}
+                                {% for field in form %}
+                                    {% for error in field.errors %}
+                                        <div>{{ error|escape }}</div>
+                                    {% endfor %}
+                                {% endfor %}
+                                {% for error in form.non_field_errors %}
+                                    <div>{{ error|escape }}</div>
+                                {% endfor %}
+                            {% endif %}
+                            {% if login_failed %}
+                                <div>Invalid admin credentials. Please try again.</div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+
+            <!-- Login Form -->
+            <form method="post" action="{% url 'admin:login' %}">
+                {% csrf_token %}
+
+                <!-- Username -->
+                <div class="form-group">
+                    <label for="id_username" class="form-label">
+                        <span class="material-icons">person</span>
+                        Username
+                    </label>
+                    <input type="text" 
+                           class="form-control" 
+                           id="id_username" 
+                           name="username" 
+                           placeholder="Enter your admin username" 
+                           required
+                           autofocus>
+                </div>
+
+                <!-- Password -->
+                <div class="form-group">
+                    <label for="id_password" class="form-label">
+                        <span class="material-icons">lock</span>
+                        Password
+                    </label>
+                    <input type="password" 
+                           class="form-control" 
+                           id="id_password" 
+                           name="password" 
+                           placeholder="Enter your password" 
+                           required>
+                </div>
+
+                <!-- Remember & Forgot -->
+                <div class="form-group" style="display: flex; justify-content: space-between; align-items: center;">
+                    <label class="form-check">
+                        <input type="checkbox" class="form-check-input" name="remember_me">
+                        <span>Remember me</span>
+                    </label>
+                    <a href="{% url 'password_reset' %}" class="forgot-password-link">
+                        <span>Forgot password?</span>
+                        <span class="material-icons" style="font-size: 14px;">help</span>
+                    </a>
+                </div>
+
+                <!-- Submit Button -->
+                <button type="submit" class="btn-submit">
+                    <span class="material-icons">arrow_forward</span>
+                    Sign In as Admin
+                </button>
+            </form>
+
+            <!-- Divider -->
+            <div class="divider">
+                <div class="divider-line"></div>
+                <div class="divider-text">OR</div>
+                <div class="divider-line"></div>
+            </div>
+
+            <!-- Security Badge -->
+            <div class="security-badge">
+                <span class="material-icons">verified</span>
+                <span>Enterprise Grade Security</span>
+            </div>
+
+            <!-- Back to Home -->
+            <div class="back-to-home">
+                <a href="/">
+                    <span class="material-icons" style="font-size: 16px;">arrow_back</span>
+                    <span>Back to Home</span>
+                </a>
+            </div>
+
+            <!-- Footer Note -->
+            <div style="text-align: center; margin-top: 20px; padding-top: 20px; border-top: 2px solid rgba(255, 0, 110, 0.2);">
+                <p style="font-size: 11px; color: #8B96A8; margin-bottom: 12px;">
+                    <span class="material-icons" style="font-size: 14px; vertical-align: middle;">person_outline</span>
+                    Are you a student? 
+                    <a href="{% url 'workshop_app:login' %}" style="color: #00D9FF; text-decoration: none; font-weight: 600;">Student Sign In</a>
+                </p>
+                
+                <!-- Navigation Links -->
+                <div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: 12px; padding-top: 12px; border-top: 1px solid rgba(255, 0, 110, 0.2);">
+                    <a href="/" style="color: #00D9FF; text-decoration: none; font-weight: 600; font-size: 12px; transition: all 0.3s ease;" onmouseover="this.style.color='#FF6B35'; this.style.textShadow='0 0 10px rgba(255, 107, 53, 0.5)';" onmouseout="this.style.color='#00D9FF'; this.style.textShadow='none';">
+                        ← Back to Home
+                    </a>
+                    <span style="color: rgba(255, 255, 255, 0.2); font-size: 12px;">|</span>
+                    <a href="{% url 'statistics_app:public' %}" style="color: #00FF41; text-decoration: none; font-weight: 600; font-size: 12px; transition: all 0.3s ease;" onmouseover="this.style.color='#00D9FF'; this.style.textShadow='0 0 10px rgba(0, 217, 255, 0.5)';" onmouseout="this.style.color='#00FF41'; this.style.textShadow='none';">
+                        View Statistics
+                    </a>
+                </div>
+
+                <p style="margin-top: 12px; color: rgba(255, 255, 255, 0.3); font-size: 11px;">© 2026 FOSSEE. All rights reserved.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        // Focus animation
+        document.querySelectorAll('.form-control').forEach(input => {
+            input.addEventListener('focus', function() {
+                this.parentElement.style.animation = 'slideUp 0.3s ease-out';
+            });
+        });
+    </script>
+</body>
+
+</html>

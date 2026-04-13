@@ -1,0 +1,544 @@
+/* ============================================================
+   DJANGO ADMIN - MODERN NEON THEME CUSTOMIZATION
+   Modernizes Django admin panel with FOSSEE neon branding
+   ============================================================ */
+
+/* ============================================================
+   ROOT COLORS (Compatible with main theme)
+   ============================================================ */
+
+:root {
+    --neon-orange: #FF6B35;
+    --neon-orange-light: #FF8A50;
+    --deep-blue: #1A3A52;
+    --dark-bg: #0A0E27;
+    --card-bg: #141829;
+    --text-primary: #FFFFFF;
+    --text-secondary: #B8C5D6;
+}
+
+/* ============================================================
+   ADMIN BODY & GLOBAL STYLES
+   ============================================================ */
+
+#admin-panel,
+body.admin {
+    background: linear-gradient(180deg, var(--dark-bg) 0%, var(--deep-blue) 100%) !important;
+    color: var(--text-primary) !important;
+    font-family: 'Segoe UI', 'Roboto', sans-serif !important;
+}
+
+/* ============================================================
+   ADMIN HEADER STYLING
+   ============================================================ */
+
+#header {
+    background: linear-gradient(90deg, var(--deep-blue) 0%, var(--deep-blue) 70%, var(--neon-orange) 100%) !important;
+    border-bottom: 3px solid var(--neon-orange) !important;
+    box-shadow: 0 4px 30px rgba(255, 107, 53, 0.3) !important;
+    padding: 1rem 2rem !important;
+}
+
+#header h1 {
+    color: var(--neon-orange) !important;
+    font-weight: 800 !important;
+    text-shadow: 0 0 20px rgba(255, 107, 53, 0.3) !important;
+    font-size: 1.8rem !important;
+    margin: 0 !important;
+    letter-spacing: 1px !important;
+}
+
+.grp-dashboard-header {
+    background: linear-gradient(90deg, var(--neon-orange), var(--neon-orange-light)) !important;
+    border-bottom: 2px solid var(--deep-blue) !important;
+    box-shadow: 0 8px 25px rgba(255, 107, 53, 0.2) !important;
+}
+
+/* ============================================================
+   ADMIN SIDEBAR
+   ============================================================ */
+
+#sidebar,
+.admin-sidebar {
+    background: linear-gradient(180deg, rgba(26, 58, 82, 0.95), rgba(15, 35, 51, 0.95)) !important;
+    backdrop-filter: blur(10px) !important;
+    border-right: 2px solid var(--neon-orange) !important;
+}
+
+.sidebar-module {
+    background: rgba(20, 24, 41, 0.8) !important;
+    border: 1px solid rgba(255, 107, 53, 0.2) !important;
+    border-radius: 8px !important;
+    margin-bottom: 1.5rem !important;
+    box-shadow: 0 0 15px rgba(255, 107, 53, 0.1) !important;
+}
+
+.sidebar-module h2,
+.module h2 {
+    background: linear-gradient(90deg, var(--neon-orange), var(--neon-orange-light)) !important;
+    color: white !important;
+    padding: 0.75rem 1rem !important;
+    margin: 0 !important;
+    font-size: 0.95rem !important;
+    border-radius: 6px 6px 0 0 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.5px !important;
+    font-weight: 700 !important;
+}
+
+.sidebar-module ul,
+.module ul {
+    list-style: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+.sidebar-module li,
+.module li {
+    padding: 0.5rem 0 !important;
+    border-bottom: 1px solid rgba(255, 107, 53, 0.1) !important;
+}
+
+.sidebar-module li:last-child {
+    border-bottom: none !important;
+}
+
+.sidebar-module a,
+.module a {
+    display: block !important;
+    color: var(--text-secondary) !important;
+    padding: 0.5rem 1rem !important;
+    text-decoration: none !important;
+    transition: all 0.3s ease !important;
+    font-weight: 500 !important;
+}
+
+.sidebar-module a:hover {
+    background: rgba(255, 107, 53, 0.15) !important;
+    color: var(--neon-orange) !important;
+    border-left: 3px solid var(--neon-orange) !important;
+    padding-left: calc(1rem - 3px) !important;
+}
+
+/* ============================================================
+   ADMIN CONTENT AREA
+   ============================================================ */
+
+#content {
+    background: linear-gradient(135deg, rgba(10, 14, 39, 0.5), rgba(26, 58, 82, 0.3)) !important;
+}
+
+/* ============================================================
+   ADMIN FORMS & INPUTS
+   ============================================================ */
+
+input[type="text"],
+input[type="password"],
+input[type="email"],
+input[type="number"],
+input[type="date"],
+input[type="datetime-local"],
+input[type="time"],
+select,
+textarea {
+    background: rgba(28, 34, 64, 0.8) !important;
+    border: 1.5px solid rgba(255, 107, 53, 0.3) !important;
+    color: var(--text-primary) !important;
+    border-radius: 6px !important;
+    padding: 0.75rem !important;
+    font-family: inherit !important;
+    transition: all 0.3s ease !important;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="email"]:focus,
+input[type="number"]:focus,
+input[type="date"]:focus,
+input[type="datetime-local"]:focus,
+input[type="time"]:focus,
+select:focus,
+textarea:focus {
+    background: rgba(28, 34, 64, 0.95) !important;
+    border-color: var(--neon-orange) !important;
+    box-shadow: 0 0 20px rgba(255, 107, 53, 0.3) !important;
+    outline: none !important;
+}
+
+input[type="checkbox"],
+input[type="radio"] {
+    accent-color: var(--neon-orange) !important;
+    cursor: pointer !important;
+}
+
+/* ============================================================
+   ADMIN BUTTONS
+   ============================================================ */
+
+.submit-row {
+    background: transparent !important;
+    padding: 1.5rem 0 !important;
+}
+
+input[type="submit"],
+button,
+.button,
+.inline-related button {
+    background: linear-gradient(135deg, var(--neon-orange), var(--neon-orange-light)) !important;
+    color: white !important;
+    border: none !important;
+    padding: 0.75rem 1.5rem !important;
+    border-radius: 6px !important;
+    cursor: pointer !important;
+    font-weight: 600 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.5px !important;
+    font-size: 0.85rem !important;
+    transition: all 0.3s ease !important;
+    box-shadow: 0 0 15px rgba(255, 107, 53, 0.2) !important;
+}
+
+input[type="submit"]:hover,
+button:hover,
+.button:hover,
+.inline-related button:hover {
+    background: linear-gradient(135deg, var(--neon-orange-light), var(--neon-orange)) !important;
+    box-shadow: 0 0 30px rgba(255, 107, 53, 0.4) !important;
+    transform: translateY(-2px) !important;
+}
+
+input[type="submit"]:active,
+button:active,
+.button:active {
+    transform: translateY(0) !important;
+}
+
+/* Delete button styling */
+.deletelink,
+.submit-row .deletelink-box .submit-row .deletelink-box input[type="submit"]:hover {
+    background: linear-gradient(135deg, #FF006E, #FF1493) !important;
+    box-shadow: 0 0 20px rgba(255, 0, 110, 0.3) !important;
+}
+
+/* ============================================================
+   ADMIN TABLES & LISTS
+   ============================================================ */
+
+table {
+    background: transparent !important;
+}
+
+table thead {
+    background: linear-gradient(90deg, var(--neon-orange), var(--neon-orange-light)) !important;
+}
+
+table thead th {
+    color: white !important;
+    padding: 1rem !important;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.5px !important;
+    border-bottom: 2px solid var(--neon-orange) !important;
+}
+
+table tbody tr {
+    background: rgba(28, 34, 64, 0.5) !important;
+    border-bottom: 1px solid rgba(255, 107, 53, 0.1) !important;
+    transition: all 0.3s ease !important;
+}
+
+table tbody tr:hover {
+    background: rgba(255, 107, 53, 0.15) !important;
+    box-shadow: inset 0 0 20px rgba(255, 107, 53, 0.1) !important;
+}
+
+table tbody td {
+    color: var(--text-secondary) !important;
+    padding: 0.75rem 1rem !important;
+}
+
+/* ============================================================
+   ADMIN CHANGELIST FILTERS
+   ============================================================ */
+
+.filterspecs {
+    background: rgba(20, 24, 41, 0.8) !important;
+    border: 1px solid rgba(255, 107, 53, 0.2) !important;
+    border-radius: 8px !important;
+    padding: 1.5rem !important;
+    box-shadow: 0 0 15px rgba(255, 107, 53, 0.1) !important;
+}
+
+.filterspecs h2 {
+    color: var(--neon-orange) !important;
+    border-bottom: 2px solid var(--neon-orange) !important;
+    padding-bottom: 0.75rem !important;
+    font-size: 1rem !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.5px !important;
+}
+
+.filterspecs li {
+    list-style: none !important;
+    padding: 0.5rem 0 !important;
+}
+
+.filterspecs a {
+    color: var(--text-secondary) !important;
+    text-decoration: none !important;
+    transition: all 0.3s ease !important;
+    display: block !important;
+    padding: 0.4rem 0.5rem !important;
+    border-radius: 4px !important;
+}
+
+.filterspecs a:hover {
+    background: rgba(255, 107, 53, 0.15) !important;
+    color: var(--neon-orange) !important;
+    padding-left: 1rem !important;
+}
+
+.filterspecs a.selected {
+    color: var(--neon-orange) !important;
+    font-weight: 700 !important;
+    background: rgba(255, 107, 53, 0.2) !important;
+}
+
+/* ============================================================
+   ADMIN DIALOGS & POPUPS
+   ============================================================ */
+
+.grp-delete-confirmation-container {
+    background: rgba(20, 24, 41, 0.95) !important;
+    border: 2px solid var(--neon-orange) !important;
+    border-radius: 12px !important;
+    box-shadow: 0 0 40px rgba(255, 107, 53, 0.3) !important;
+}
+
+.grp-confirmation-modal-block {
+    border-top: 3px solid var(--neon-orange) !important;
+}
+
+/* ============================================================
+   ADMIN RELATED INLINE EDITING
+   ============================================================ */
+
+.inline-related {
+    background: rgba(20, 24, 41, 0.8) !important;
+    border: 1px solid rgba(255, 107, 53, 0.2) !important;
+    border-radius: 8px !important;
+    padding: 1.5rem !important;
+    margin-bottom: 1.5rem !important;
+}
+
+.inline-related h3 {
+    background: linear-gradient(90deg, var(--neon-orange), var(--neon-orange-light)) !important;
+    color: white !important;
+    padding: 0.75rem 1rem !important;
+    margin: -1.5rem -1.5rem 1rem -1.5rem !important;
+    border-radius: 6px 6px 0 0 !important;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.5px !important;
+}
+
+/* ============================================================
+   ADMIN MESSAGES & ALERTS
+   ============================================================ */
+
+.messagelist {
+    list-style: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+.messagelist li {
+    background: rgba(20, 24, 41, 0.9) !important;
+    border: 1px solid var(--neon-orange) !important;
+    border-radius: 8px !important;
+    padding: 1rem !important;
+    margin-bottom: 1rem !important;
+    color: var(--text-secondary) !important;
+    box-shadow: 0 0 20px rgba(255, 107, 53, 0.2) !important;
+}
+
+.messagelist li.success {
+    border-color: #00FF41 !important;
+    background: rgba(0, 255, 65, 0.1) !important;
+    color: #00FF41 !important;
+}
+
+.messagelist li.warning {
+    border-color: #FFB703 !important;
+    background: rgba(255, 183, 3, 0.1) !important;
+    color: #FFB703 !important;
+}
+
+.messagelist li.error {
+    border-color: #FF006E !important;
+    background: rgba(255, 0, 110, 0.1) !important;
+    color: #FF006E !important;
+}
+
+/* ============================================================
+   ADMIN FIELDSET & LABELS
+   ============================================================ */
+
+fieldset {
+    background: rgba(20, 24, 41, 0.5) !important;
+    border: 1px solid rgba(255, 107, 53, 0.1) !important;
+    border-radius: 8px !important;
+    padding: 1.5rem !important;
+}
+
+fieldset h2,
+legend {
+    color: var(--neon-orange) !important;
+    background: transparent !important;
+    border-bottom: 2px solid var(--neon-orange) !important;
+    padding-bottom: 0.75rem !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.5px !important;
+    font-weight: 700 !important;
+}
+
+label {
+    color: var(--text-secondary) !important;
+    font-weight: 500 !important;
+}
+
+/* ============================================================
+   ADMIN ERRORS & VALIDATION
+   ============================================================ */
+
+ul.errorlist {
+    list-style: none !important;
+    background: rgba(255, 0, 110, 0.1) !important;
+    border: 1px solid #FF006E !important;
+    border-radius: 6px !important;
+    padding: 1rem !important;
+    margin-bottom: 1rem !important;
+    color: #FF006E !important;
+}
+
+ul.errorlist li {
+    padding: 0.5rem 0 !important;
+    margin: 0 !important;
+}
+
+.errorlist + input,
+.errorlist + textarea {
+    border-color: #FF006E !important;
+}
+
+/* ============================================================
+   ADMIN RESPONSIVENESS
+   ============================================================ */
+
+@media (max-width: 768px) {
+    #sidebar {
+        background: linear-gradient(180deg, rgba(26, 58, 82, 0.98), rgba(15, 35, 51, 0.98)) !important;
+        position: fixed !important;
+        left: 0 !important;
+        top: 0 !important;
+        width: 250px !important;
+        height: 100vh !important;
+        z-index: 1000 !important;
+        overflow-y: auto !important;
+    }
+
+    #content {
+        margin-left: 250px !important;
+    }
+
+    .filterspecs {
+        position: sticky !important;
+        top: 1rem !important;
+    }
+
+    table {
+        font-size: 0.85rem !important;
+    }
+}
+
+/* ============================================================
+   ADMIN SEARCH BAR
+   ============================================================ */
+
+#searchbar {
+    background: transparent !important;
+    margin-bottom: 1rem !important;
+}
+
+#searchbar input[type="text"] {
+    background: rgba(28, 34, 64, 0.8) !important;
+    border: 2px solid var(--neon-orange) !important;
+    color: var(--text-primary) !important;
+    padding: 0.75rem 1rem !important;
+    border-radius: 8px !important;
+    width: 100% !important;
+    font-size: 0.95rem !important;
+}
+
+#searchbar input[type="text"]::placeholder {
+    color: var(--text-tertiary) !important;
+}
+
+/* ============================================================
+   ADMIN PAGINATION
+   ============================================================ */
+
+.step-links {
+    display: flex !important;
+    gap: 1rem !important;
+    margin-top: 1.5rem !important;
+    flex-wrap: wrap !important;
+}
+
+.step-links a,
+.step-links .step-back,
+.step-links .step-next {
+    background: rgba(255, 107, 53, 0.15) !important;
+    border: 1px solid var(--neon-orange) !important;
+    color: var(--neon-orange) !important;
+    padding: 0.5rem 1rem !important;
+    border-radius: 6px !important;
+    text-decoration: none !important;
+    font-weight: 500 !important;
+    transition: all 0.3s ease !important;
+}
+
+.step-links a:hover,
+.step-links .step-back:hover,
+.step-links .step-next:hover {
+    background: var(--neon-orange) !important;
+    color: white !important;
+}
+
+.step-links .current {
+    background: var(--neon-orange) !important;
+    color: white !important;
+    border-color: var(--neon-orange) !important;
+}
+
+/* ============================================================
+   ADMIN BREADCRUMBS
+   ============================================================ */
+
+.breadcrumbs {
+    background: transparent !important;
+    padding: 1rem 0 !important;
+    margin-bottom: 1.5rem !important;
+    border-bottom: 2px solid rgba(255, 107, 53, 0.3) !important;
+}
+
+.breadcrumbs a {
+    color: var(--neon-orange) !important;
+    text-decoration: none !important;
+    font-weight: 500 !important;
+}
+
+.breadcrumbs a:hover {
+    text-decoration: underline !important;
+    text-shadow: 0 0 10px rgba(255, 107, 53, 0.3) !important;
+}

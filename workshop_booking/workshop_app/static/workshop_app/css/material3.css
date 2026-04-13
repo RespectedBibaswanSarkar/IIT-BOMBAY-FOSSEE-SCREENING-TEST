@@ -1,0 +1,641 @@
+/* ============================================================
+   MATERIAL 3 DESIGN SYSTEM FOR FOSSEE WORKSHOPS
+   ============================================================ */
+
+:root {
+  /* Primary Colors */
+  --md-sys-color-primary: #006a4e;
+  --md-sys-color-on-primary: #ffffff;
+  --md-sys-color-primary-container: #7ff8d3;
+  --md-sys-color-on-primary-container: #00210e;
+
+  /* Secondary Colors */
+  --md-sys-color-secondary: #4e6555;
+  --md-sys-color-on-secondary: #ffffff;
+  --md-sys-color-secondary-container: #d0ecd8;
+  --md-sys-color-on-secondary-container: #0b2016;
+
+  /* Tertiary Colors */
+  --md-sys-color-tertiary: #386660;
+  --md-sys-color-on-tertiary: #ffffff;
+  --md-sys-color-tertiary-container: #bbeae5;
+  --md-sys-color-on-tertiary-container: #00201b;
+
+  /* Error Colors */
+  --md-sys-color-error: #b3261e;
+  --md-sys-color-on-error: #ffffff;
+  --md-sys-color-error-container: #f9dedc;
+  --md-sys-color-on-error-container: #410e0b;
+
+  /* Neutral Colors */
+  --md-sys-color-background: #fffbfe;
+  --md-sys-color-on-background: #1c1b1f;
+  --md-sys-color-surface: #fffbfe;
+  --md-sys-color-on-surface: #1c1b1f;
+  --md-sys-color-surface-variant: #e7e0ec;
+  --md-sys-color-on-surface-variant: #49454e;
+  
+  /* Outline */
+  --md-sys-color-outline: #79747e;
+  --md-sys-color-outline-variant: #cac7d0;
+
+  /* Typography */
+  --md-sys-typescale-display-large-size: 57px;
+  --md-sys-typescale-display-large-weight: 400;
+  --md-sys-typescale-display-medium-size: 45px;
+  --md-sys-typescale-display-medium-weight: 400;
+  --md-sys-typescale-display-small-size: 36px;
+  --md-sys-typescale-display-small-weight: 400;
+  --md-sys-typescale-headline-large-size: 32px;
+  --md-sys-typescale-headline-large-weight: 400;
+  --md-sys-typescale-headline-medium-size: 28px;
+  --md-sys-typescale-headline-medium-weight: 400;
+  --md-sys-typescale-headline-small-size: 24px;
+  --md-sys-typescale-headline-small-weight: 500;
+  --md-sys-typescale-title-large-size: 22px;
+  --md-sys-typescale-title-large-weight: 500;
+  --md-sys-typescale-title-medium-size: 16px;
+  --md-sys-typescale-title-medium-weight: 500;
+  --md-sys-typescale-title-small-size: 14px;
+  --md-sys-typescale-title-small-weight: 500;
+  --md-sys-typescale-body-large-size: 16px;
+  --md-sys-typescale-body-large-weight: 400;
+  --md-sys-typescale-body-medium-size: 14px;
+  --md-sys-typescale-body-medium-weight: 400;
+  --md-sys-typescale-body-small-size: 12px;
+  --md-sys-typescale-body-small-weight: 400;
+  --md-sys-typescale-label-large-size: 14px;
+  --md-sys-typescale-label-large-weight: 500;
+  --md-sys-typescale-label-medium-size: 12px;
+  --md-sys-typescale-label-medium-weight: 500;
+  --md-sys-typescale-label-small-size: 11px;
+  --md-sys-typescale-label-small-weight: 500;
+
+  /* Elevation/Shadows */
+  --md-sys-elevation-level0: 0px 0px 0px rgba(0, 0, 0, 0);
+  --md-sys-elevation-level1: 0px 1px 3px rgba(0, 0, 0, 0.12), 0px 1px 2px rgba(0, 0, 0, 0.24);
+  --md-sys-elevation-level2: 0px 3px 6px rgba(0, 0, 0, 0.15), 0px 2px 4px rgba(0, 0, 0, 0.12);
+  --md-sys-elevation-level3: 0px 10px 20px rgba(0, 0, 0, 0.15), 0px 3px 6px rgba(0, 0, 0, 0.10);
+  --md-sys-elevation-level4: 0px 15px 30px rgba(0, 0, 0, 0.20), 0px 5px 10px rgba(0, 0, 0, 0.05);
+  --md-sys-elevation-level5: 0px 20px 40px rgba(0, 0, 0, 0.25), 0px 8px 16px rgba(0, 0, 0, 0.04);
+}
+
+/* ============================================================
+   GLOBAL STYLES
+   ============================================================ */
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica', 'Arial', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background-color: var(--md-sys-color-background);
+  color: var(--md-sys-color-on-background);
+  margin: 0;
+  padding: 0;
+  font-size: var(--md-sys-typescale-body-large-size);
+  font-weight: var(--md-sys-typescale-body-large-weight);
+  line-height: 1.5;
+}
+
+/* ============================================================
+   NAVIGATION BAR (Material 3 Top App Bar)
+   ============================================================ */
+
+.navbar {
+  background-color: var(--md-sys-color-surface) !important;
+  box-shadow: var(--md-sys-elevation-level2);
+  border-bottom: 1px solid var(--md-sys-color-outline-variant);
+  padding: 0.5rem 1rem !important;
+  z-index: 1000;
+}
+
+.navbar-brand {
+  font-size: var(--md-sys-typescale-title-large-size) !important;
+  font-weight: var(--md-sys-typescale-title-large-weight) !important;
+  color: var(--md-sys-color-primary) !important;
+  letter-spacing: 0.5px;
+}
+
+.navbar-dark .navbar-nav .nav-link {
+  color: var(--md-sys-color-on-surface-variant) !important;
+  font-size: var(--md-sys-typescale-label-large-size);
+  font-weight: var(--md-sys-typescale-label-large-weight);
+  transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);
+  padding: 0.5rem 1rem;
+}
+
+.navbar-dark .navbar-nav .nav-link:hover {
+  color: var(--md-sys-color-primary) !important;
+  background-color: var(--md-sys-color-primary-container);
+  border-radius: 8px;
+}
+
+.navbar-dark .navbar-nav .nav-link.active {
+  color: var(--md-sys-color-primary) !important;
+  border-bottom: 3px solid var(--md-sys-color-primary);
+  border-radius: 0;
+}
+
+.navbar-dark .navbar-nav .dropdown-menu {
+  background-color: var(--md-sys-color-surface);
+  border: 1px solid var(--md-sys-color-outline-variant);
+  border-radius: 12px;
+  box-shadow: var(--md-sys-elevation-level3);
+}
+
+.navbar-dark .navbar-nav .dropdown-menu .dropdown-item {
+  color: var(--md-sys-color-on-surface);
+  font-size: var(--md-sys-typescale-body-medium-size);
+  padding: 0.75rem 1.5rem;
+  transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.navbar-dark .navbar-nav .dropdown-menu .dropdown-item:hover {
+  background-color: var(--md-sys-color-primary-container);
+  color: var(--md-sys-color-primary);
+}
+
+/* ============================================================
+   MATERIAL 3 BUTTONS
+   ============================================================ */
+
+.btn {
+  border-radius: 24px;
+  text-transform: uppercase;
+  font-size: var(--md-sys-typescale-label-large-size);
+  font-weight: var(--md-sys-typescale-label-large-weight);
+  letter-spacing: 0.5px;
+  transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);
+  border: none;
+  padding: 0.75rem 1.5rem;
+  box-shadow: var(--md-sys-elevation-level1);
+}
+
+.btn:hover {
+  box-shadow: var(--md-sys-elevation-level2);
+}
+
+.btn:active {
+  box-shadow: var(--md-sys-elevation-level2);
+}
+
+.btn-primary {
+  background-color: var(--md-sys-color-primary) !important;
+  color: var(--md-sys-color-on-primary) !important;
+}
+
+.btn-primary:hover {
+  background-color: #005341 !important;
+  opacity: 0.95;
+}
+
+.btn-secondary {
+  background-color: var(--md-sys-color-secondary) !important;
+  color: var(--md-sys-color-on-secondary) !important;
+}
+
+.btn-secondary:hover {
+  background-color: #3d5247 !important;
+  opacity: 0.95;
+}
+
+.btn-outline-primary {
+  border: 1px solid var(--md-sys-color-primary) !important;
+  color: var(--md-sys-color-primary) !important;
+  background-color: transparent;
+}
+
+.btn-outline-primary:hover {
+  background-color: var(--md-sys-color-primary-container);
+  color: var(--md-sys-color-primary);
+}
+
+/* ============================================================
+   CARDS
+   ============================================================ */
+
+.card {
+  border: none;
+  border-radius: 16px;
+  background-color: var(--md-sys-color-surface);
+  box-shadow: var(--md-sys-elevation-level1);
+  transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+  border: 1px solid var(--md-sys-color-outline-variant);
+}
+
+.card:hover {
+  box-shadow: var(--md-sys-elevation-level3);
+  transform: translateY(-2px);
+}
+
+.card-body {
+  padding: 2rem;
+  color: var(--md-sys-color-on-surface);
+}
+
+.card-title {
+  font-size: var(--md-sys-typescale-headline-small-size);
+  font-weight: var(--md-sys-typescale-headline-small-weight);
+  color: var(--md-sys-color-on-surface);
+  margin-bottom: 1rem;
+}
+
+.card-text {
+  font-size: var(--md-sys-typescale-body-medium-size);
+  color: var(--md-sys-color-on-surface-variant);
+  margin-bottom: 1rem;
+}
+
+.card-header {
+  background-color: var(--md-sys-color-primary-container);
+  border-bottom: 1px solid var(--md-sys-color-outline-variant);
+  padding: 1.5rem 2rem;
+}
+
+.card-header .card-title {
+  margin: 0;
+  color: var(--md-sys-color-primary);
+}
+
+/* ============================================================
+   FORMS
+   ============================================================ */
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-group label {
+  font-size: var(--md-sys-typescale-label-large-size);
+  font-weight: var(--md-sys-typescale-label-large-weight);
+  color: var(--md-sys-color-on-surface);
+  margin-bottom: 0.5rem;
+  display: block;
+}
+
+.form-control {
+  border: 1px solid var(--md-sys-color-outline);
+  border-radius: 12px;
+  padding: 0.875rem 1rem;
+  font-size: var(--md-sys-typescale-body-medium-size);
+  color: var(--md-sys-color-on-surface);
+  background-color: var(--md-sys-color-surface);
+  transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.form-control:focus {
+  border-color: var(--md-sys-color-primary);
+  box-shadow: 0 0 0 3px rgba(0, 106, 78, 0.1);
+  outline: none;
+}
+
+.form-control::placeholder {
+  color: var(--md-sys-color-on-surface-variant);
+  opacity: 0.6;
+}
+
+textarea.form-control {
+  border-radius: 12px;
+  min-height: 100px;
+  resize: vertical;
+}
+
+/* ============================================================
+   ALERTS
+   ============================================================ */
+
+.alert {
+  border-radius: 12px;
+  border: 1px solid;
+  font-size: var(--md-sys-typescale-body-medium-size);
+  padding: 1rem 1.5rem;
+}
+
+.alert-success {
+  background-color: rgba(127, 248, 211, 0.1);
+  color: #00483d;
+  border-color: rgba(0, 106, 78, 0.3);
+}
+
+.alert-danger {
+  background-color: rgba(249, 222, 220, 0.1);
+  color: #601410;
+  border-color: rgba(179, 38, 30, 0.3);
+}
+
+.alert-warning {
+  background-color: rgba(255, 245, 168, 0.1);
+  color: #6f5707;
+  border-color: rgba(255, 193, 7, 0.3);
+}
+
+.alert-info {
+  background-color: rgba(198, 239, 248, 0.1);
+  color: #003d4f;
+  border-color: rgba(0, 150, 197, 0.3);
+}
+
+.alert-close {
+  background: none;
+  border: none;
+  color: currentColor;
+  opacity: 0.6;
+  cursor: pointer;
+  padding: 0;
+  font-size: 1.25rem;
+}
+
+.alert-close:hover {
+  opacity: 1;
+}
+
+/* ============================================================
+   MATERIAL 3 TABLE
+   ============================================================ */
+
+.table {
+  border-collapse: collapse;
+  background-color: var(--md-sys-color-surface);
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid var(--md-sys-color-outline-variant);
+}
+
+.table thead th {
+  background-color: var(--md-sys-color-primary-container);
+  color: var(--md-sys-color-primary);
+  font-size: var(--md-sys-typescale-label-medium-size);
+  font-weight: var(--md-sys-typescale-label-medium-weight);
+  padding: 1rem;
+  text-align: left;
+  border: none;
+}
+
+.table tbody td {
+  padding: 1rem;
+  border-bottom: 1px solid var(--md-sys-color-outline-variant);
+  color: var(--md-sys-color-on-surface);
+  font-size: var(--md-sys-typescale-body-medium-size);
+}
+
+.table tbody tr {
+  transition: background-color 200ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.table tbody tr:hover {
+  background-color: rgba(0, 106, 78, 0.05);
+}
+
+.table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* ============================================================
+   BADGES AND TAGS
+   ============================================================ */
+
+.badge {
+  border-radius: 16px;
+  padding: 0.35rem 0.75rem;
+  font-size: var(--md-sys-typescale-label-small-size);
+  font-weight: var(--md-sys-typescale-label-small-weight);
+  display: inline-block;
+}
+
+.badge-primary {
+  background-color: var(--md-sys-color-primary-container);
+  color: var(--md-sys-color-primary);
+}
+
+.badge-secondary {
+  background-color: var(--md-sys-color-secondary-container);
+  color: var(--md-sys-color-secondary);
+}
+
+.badge-success {
+  background-color: rgba(127, 248, 211, 0.3);
+  color: #00483d;
+}
+
+.badge-danger {
+  background-color: rgba(249, 222, 220, 0.3);
+  color: #601410;
+}
+
+/* ============================================================
+   CONTENT CONTAINER
+   ============================================================ */
+
+.base-content {
+  padding-top: 6rem;
+  padding-bottom: 8rem;
+  min-height: calc(100vh - 140px);
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+/* ============================================================
+   HEADING STYLES
+   ============================================================ */
+
+h1 {
+  font-size: var(--md-sys-typescale-headline-large-size);
+  font-weight: var(--md-sys-typescale-headline-large-weight);
+  color: var(--md-sys-color-on-background);
+  margin-bottom: 1rem;
+}
+
+h2 {
+  font-size: var(--md-sys-typescale-headline-medium-size);
+  font-weight: var(--md-sys-typescale-headline-medium-weight);
+  color: var(--md-sys-color-on-background);
+  margin-bottom: 0.875rem;
+}
+
+h3 {
+  font-size: var(--md-sys-typescale-headline-small-size);
+  font-weight: var(--md-sys-typescale-headline-small-weight);
+  color: var(--md-sys-color-on-background);
+  margin-bottom: 0.75rem;
+}
+
+h4 {
+  font-size: var(--md-sys-typescale-title-large-size);
+  font-weight: var(--md-sys-typescale-title-large-weight);
+  color: var(--md-sys-color-on-background);
+  margin-bottom: 0.5rem;
+}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+
+.footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background-color: var(--md-sys-color-surface);
+  color: var(--md-sys-color-on-surface-variant);
+  border-top: 1px solid var(--md-sys-color-outline-variant);
+  text-align: center;
+  z-index: 100;
+  padding: 1.5rem;
+  font-size: var(--md-sys-typescale-body-small-size);
+}
+
+.footer .container {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+/* ============================================================
+   UTILITY CLASSES
+   ============================================================ */
+
+.text-primary {
+  color: var(--md-sys-color-primary) !important;
+}
+
+.text-secondary {
+  color: var(--md-sys-color-secondary) !important;
+}
+
+.text-error {
+  color: var(--md-sys-color-error) !important;
+}
+
+.text-tertiary {
+  color: var(--md-sys-color-tertiary) !important;
+}
+
+.bg-primary {
+  background-color: var(--md-sys-color-primary) !important;
+  color: var(--md-sys-color-on-primary) !important;
+}
+
+.bg-primary-container {
+  background-color: var(--md-sys-color-primary-container) !important;
+  color: var(--md-sys-color-on-primary-container) !important;
+}
+
+.bg-surface {
+  background-color: var(--md-sys-color-surface) !important;
+}
+
+/* Rounded corners */
+.rounded-xs {
+  border-radius: 4px;
+}
+
+.rounded-sm {
+  border-radius: 8px;
+}
+
+.rounded-md {
+  border-radius: 12px;
+}
+
+.rounded-lg {
+  border-radius: 16px;
+}
+
+.rounded-xl {
+  border-radius: 24px;
+}
+
+/* Shadows */
+.shadow-1 {
+  box-shadow: var(--md-sys-elevation-level1);
+}
+
+.shadow-2 {
+  box-shadow: var(--md-sys-elevation-level2);
+}
+
+.shadow-3 {
+  box-shadow: var(--md-sys-elevation-level3);
+}
+
+.shadow-4 {
+  box-shadow: var(--md-sys-elevation-level4);
+}
+
+.shadow-5 {
+  box-shadow: var(--md-sys-elevation-level5);
+}
+
+/* Spacing */
+.gap-1 {
+  gap: 0.5rem;
+}
+
+.gap-2 {
+  gap: 1rem;
+}
+
+.gap-3 {
+  gap: 1.5rem;
+}
+
+.gap-4 {
+  gap: 2rem;
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+
+@media (max-width: 768px) {
+  .base-content {
+    padding-top: 5rem;
+    padding-bottom: 8rem;
+  }
+
+  .card-body {
+    padding: 1.5rem;
+  }
+
+  .navbar {
+    padding: 0.25rem 0.75rem !important;
+  }
+
+  .btn {
+    padding: 0.625rem 1rem;
+    font-size: var(--md-sys-typescale-label-medium-size);
+  }
+}
+
+@media (max-width: 480px) {
+  h1 {
+    font-size: var(--md-sys-typescale-headline-medium-size);
+  }
+
+  h2 {
+    font-size: var(--md-sys-typescale-headline-small-size);
+  }
+
+  .navbar-collapse {
+    margin-top: 1rem;
+  }
+
+  .table {
+    font-size: var(--md-sys-typescale-body-small-size);
+  }
+
+  .table thead th,
+  .table tbody td {
+    padding: 0.75rem 0.5rem;
+  }
+}

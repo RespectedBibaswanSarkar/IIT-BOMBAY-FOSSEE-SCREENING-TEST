@@ -1,0 +1,504 @@
+/* ============================================================
+   MATERIAL 3 ADDITIONAL UTILITIES & ENHANCEMENTS
+   ============================================================ */
+
+/* These utilities enhance the base material3.css with additional
+   helper classes for common Material 3 patterns */
+
+/* ============================================================
+   STATUS INDICATORS
+   ============================================================ */
+
+.status {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    border-radius: 16px;
+    font-size: var(--md-sys-typescale-label-medium-size);
+    font-weight: var(--md-sys-typescale-label-medium-weight);
+}
+
+.status.active {
+    background-color: rgba(127, 248, 211, 0.2);
+    color: #00483d;
+}
+
+.status.pending {
+    background-color: rgba(255, 193, 7, 0.2);
+    color: #6f5707;
+}
+
+.status.inactive {
+    background-color: rgba(224, 224, 224, 0.5);
+    color: #424242;
+}
+
+.status.error {
+    background-color: rgba(249, 222, 220, 0.2);
+    color: #601410;
+}
+
+/* ============================================================
+   LIST ITEMS WITH MATERIAL 3 STYLING
+   ============================================================ */
+
+.list-item {
+    padding: 1rem;
+    border-bottom: 1px solid var(--md-sys-color-outline-variant);
+    transition: background-color 200ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.list-item:hover {
+    background-color: var(--md-sys-color-primary-container);
+    cursor: pointer;
+}
+
+.list-item:first-child {
+    border-radius: 12px 12px 0 0;
+}
+
+.list-item:last-child {
+    border-radius: 0 0 12px 12px;
+    border-bottom: none;
+}
+
+.list-item-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    margin-right: 1rem;
+    border-radius: 50%;
+    background-color: var(--md-sys-color-primary-container);
+    color: var(--md-sys-color-primary);
+}
+
+/* ============================================================
+   CHIPS (MATERIAL 3)
+   ============================================================ */
+
+.chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    border-radius: 16px;
+    background-color: var(--md-sys-color-surface-variant);
+    border: 1px solid var(--md-sys-color-outline);
+    cursor: pointer;
+    transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);
+    font-size: var(--md-sys-typescale-label-medium-size);
+}
+
+.chip:hover {
+    background-color: var(--md-sys-color-outline-variant);
+}
+
+.chip.active {
+    background-color: var(--md-sys-color-primary);
+    color: var(--md-sys-color-on-primary);
+    border-color: var(--md-sys-color-primary);
+}
+
+.chip-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 18px;
+    height: 18px;
+}
+
+.chip-close {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: currentColor;
+    padding: 0;
+    margin-left: 0.5rem;
+    font-size: 18px;
+    opacity: 0.7;
+    transition: opacity 200ms;
+}
+
+.chip-close:hover {
+    opacity: 1;
+}
+
+/* ============================================================
+   DIALOG / MODAL OVERLAY
+   ============================================================ */
+
+.modal-backdrop {
+    background-color: rgba(0, 0, 0, 0.32);
+}
+
+.modal-content {
+    border: none;
+    border-radius: 28px;
+    box-shadow: var(--md-sys-elevation-level5);
+}
+
+.modal-header {
+    background-color: var(--md-sys-color-background);
+    border: none;
+    padding: 1.5rem;
+    border-radius: 28px 28px 0 0;
+}
+
+.modal-header .modal-title {
+    font-size: var(--md-sys-typescale-headline-small-size);
+    font-weight: var(--md-sys-typescale-headline-small-weight);
+}
+
+.modal-body {
+    padding: 2rem;
+    color: var(--md-sys-color-on-surface);
+}
+
+.modal-footer {
+    background-color: var(--md-sys-color-background);
+    border: none;
+    padding: 1.5rem;
+    border-radius: 0 0 28px 28px;
+    gap: 1rem;
+    justify-content: flex-end;
+}
+
+/* ============================================================
+   FABs (FLOATING ACTION BUTTONS)
+   ============================================================ */
+
+.fab {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background-color: var(--md-sys-color-primary);
+    color: var(--md-sys-color-on-primary);
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--md-sys-elevation-level4);
+    transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 50;
+}
+
+.fab:hover {
+    box-shadow: var(--md-sys-elevation-level5);
+    transform: scale(1.1);
+}
+
+.fab:active {
+    transform: scale(0.95);
+}
+
+.fab.extended {
+    width: auto;
+    padding: 0 1.5rem;
+    border-radius: 24px;
+}
+
+/* ============================================================
+   TABS (MATERIAL 3)
+   ============================================================ */
+
+.nav-tabs {
+    border: none;
+    display: flex;
+    gap: 0;
+    padding: 0;
+    background-color: var(--md-sys-color-background);
+}
+
+.nav-tabs .nav-link {
+    border: none;
+    color: var(--md-sys-color-on-surface-variant);
+    font-size: var(--md-sys-typescale-label-large-size);
+    font-weight: var(--md-sys-typescale-label-large-weight);
+    padding: 1rem 1.5rem;
+    border-bottom: 3px solid transparent;
+    transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.nav-tabs .nav-link:hover {
+    color: var(--md-sys-color-on-surface);
+    background-color: var(--md-sys-color-primary-container);
+}
+
+.nav-tabs .nav-link.active {
+    color: var(--md-sys-color-primary);
+    border-bottom-color: var(--md-sys-color-primary);
+    background-color: transparent;
+}
+
+.tab-content {
+    border: none;
+    padding: 1.5rem 0;
+}
+
+/* ============================================================
+   PROGRESS INDICATORS
+   ============================================================ */
+
+.progress {
+    background-color: var(--md-sys-color-surface-variant);
+    border-radius: 4px;
+    overflow: hidden;
+    height: 4px;
+}
+
+.progress-bar {
+    background-color: var(--md-sys-color-primary);
+    height: 100%;
+    transition: width 300ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ============================================================
+   RATING/STAR COMPONENT
+   ============================================================ */
+
+.rating {
+    display: inline-flex;
+    gap: 0.5rem;
+}
+
+.rating-star {
+    font-size: 24px;
+    color: var(--md-sys-color-outline);
+    cursor: pointer;
+    transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.rating-star:hover,
+.rating-star.active {
+    color: #ffc107;
+    transform: scale(1.2);
+}
+
+/* ============================================================
+   TOOLTIP
+   ============================================================ */
+
+.tooltip-inner {
+    background-color: #424242;
+    color: white;
+    border-radius: 4px;
+    font-size: var(--md-sys-typescale-body-small-size);
+    padding: 0.6rem 0.8rem;
+    box-shadow: var(--md-sys-elevation-level3);
+}
+
+/* ============================================================
+   DIVIDERS
+   ============================================================ */
+
+.divider {
+    height: 1px;
+    background-color: var(--md-sys-color-outline-variant);
+    margin: 1rem 0;
+}
+
+.divider-text {
+    height: 1px;
+    background: linear-gradient(to right, 
+        var(--md-sys-color-outline-variant) 0%, 
+        transparent 50%, 
+        var(--md-sys-color-outline-variant) 100%);
+    margin: 1rem 0;
+    position: relative;
+}
+
+.divider-text span {
+    position: absolute;
+    top: -0.75rem;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: var(--md-sys-color-background);
+    padding: 0 0.5rem;
+    color: var(--md-sys-color-on-surface-variant);
+    font-size: var(--md-sys-typescale-label-small-size);
+}
+
+/* ============================================================
+   EXPANSION PANEL (ACCORDION)
+   ============================================================ */
+
+.accordion-button {
+    background-color: var(--md-sys-color-surface);
+    border: 1px solid var(--md-sys-color-outline-variant);
+    color: var(--md-sys-color-on-surface);
+    font-size: var(--md-sys-typescale-title-medium-size);
+    font-weight: var(--md-sys-typescale-title-medium-weight);
+    padding: 1rem 1.5rem;
+    transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.accordion-button:not(.collapsed) {
+    background-color: var(--md-sys-color-primary-container);
+    color: var(--md-sys-color-primary);
+    border-color: var(--md-sys-color-primary);
+}
+
+.accordion-button:hover:not(.collapsed) {
+    background-color: var(--md-sys-color-primary-container);
+}
+
+.accordion-body {
+    background-color: var(--md-sys-color-background);
+    border: 1px solid var(--md-sys-color-outline-variant);
+    border-top: none;
+    color: var(--md-sys-color-on-surface);
+    padding: 1.5rem;
+}
+
+/* ============================================================
+   BREADCRUMB
+   ============================================================ */
+
+.breadcrumb {
+    background-color: transparent;
+    padding: 0;
+    gap: 0;
+}
+
+.breadcrumb-item {
+    font-size: var(--md-sys-typescale-label-medium-size);
+}
+
+.breadcrumb-item + .breadcrumb-item::before {
+    content: "/";
+    color: var(--md-sys-color-on-surface-variant);
+    margin: 0 0.5rem;
+}
+
+.breadcrumb-item a {
+    color: var(--md-sys-color-primary);
+    text-decoration: none;
+    transition: color 200ms;
+}
+
+.breadcrumb-item a:hover {
+    color: var(--md-sys-color-primary);
+    text-decoration: underline;
+}
+
+.breadcrumb-item.active {
+    color: var(--md-sys-color-on-surface);
+}
+
+/* ============================================================
+   TIME PICKER / DATE PICKER ENHANCEMENT
+   ============================================================ */
+
+input[type="date"],
+input[type="time"],
+input[type="datetime-local"] {
+    border-radius: 12px !important;
+    border: 1px solid var(--md-sys-color-outline) !important;
+    padding: 0.875rem 1rem !important;
+    font-size: var(--md-sys-typescale-body-medium-size) !important;
+    color: var(--md-sys-color-on-surface) !important;
+    transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+input[type="date"]:focus,
+input[type="time"]:focus,
+input[type="datetime-local"]:focus {
+    border-color: var(--md-sys-color-primary) !important;
+    box-shadow: 0 0 0 3px rgba(0, 106, 78, 0.1) !important;
+}
+
+/* ============================================================
+   FORM VALIDATION STATES
+   ============================================================ */
+
+.form-control.is-valid {
+    border-color: #4caf50 !important;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3e%3cpath fill='%234caf50' d='M2.3 6.73L.6 4.53c-.4-1.04.46-1.4 1.1-.8l1.1 1.4 3.4-3.8c.6-.63 1.6-.27 1.2.7l-4 4.6c-.43.5-.8.4-1.1.1z'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right calc(.375em + .1875rem) center;
+    background-size: calc(.75em + .375rem) calc(.75em + .375rem);
+    padding-right: calc(1.5em + .75rem);
+}
+
+.form-control.is-invalid {
+    border-color: var(--md-sys-color-error) !important;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='none' stroke='%23b3261e' viewBox='0 0 12 12'%3e%3ccircle cx='6' cy='6' r='4.5'/%3e%3cpath stroke-linejoin='round' d='M5.8 3.6h.4v4.5h-.4z'/%3e%3ccircle cx='6' cy='9.2' r='.6' fill='%23b3261e' stroke='none'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right calc(.375em + .1875rem) center;
+    background-size: calc(.75em + .375rem) calc(.75em + .375rem);
+    padding-right: calc(1.5em + .75rem);
+}
+
+.valid-feedback,
+.invalid-feedback {
+    font-size: var(--md-sys-typescale-body-small-size);
+    display: block;
+    margin-top: 0.5rem;
+}
+
+/* ============================================================
+   DARK MODE PREPARATION (OPTIONAL)
+   ============================================================ */
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        /* Can be enabled by adding dark mode colors
+           --md-sys-color-background: #121212;
+           --md-sys-color-on-background: #ffffff;
+           etc.
+        */
+    }
+}
+
+/* ============================================================
+   ANIMATION KEYFRAMES
+   ============================================================ */
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(-100%);
+    }
+    to {
+        transform: translateX(0);
+    }
+}
+
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.7;
+    }
+}
+
+/* Utility animation classes */
+.animate-fade-in {
+    animation: fadeIn 300ms cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.animate-slide-in {
+    animation: slideIn 300ms cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.animate-pulse {
+    animation: pulse 2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}

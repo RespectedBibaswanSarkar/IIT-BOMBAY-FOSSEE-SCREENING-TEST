@@ -1,0 +1,397 @@
+{% extends 'workshop_app/base.html' %}
+
+{% block title %}
+    FOSSEE Workshop Booking System
+{% endblock %}
+
+{% block content %}
+<style>
+    .home-hero {
+        background: linear-gradient(135deg, rgba(255, 107, 53, 0.1), rgba(26, 58, 82, 0.2));
+        border-bottom: 2px solid #FF6B35;
+        padding: 80px 20px;
+        text-align: center;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .hero-content {
+        max-width: 800px;
+    }
+
+    .hero-title {
+        font-size: 3.5rem;
+        font-weight: 800;
+        margin-bottom: 20px;
+        background: linear-gradient(135deg, #FF6B35, #FF8A50);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+
+    .hero-subtitle {
+        font-size: 1.3rem;
+        color: #8B96A8;
+        margin-bottom: 50px;
+        font-weight: 300;
+    }
+
+    .hero-brand {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 15px;
+        margin-bottom: 30px;
+    }
+
+    .hero-brand span {
+        font-size: 3rem;
+    }
+
+    .action-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 30px;
+        margin-top: 60px;
+    }
+
+    .action-card {
+        background: linear-gradient(135deg, rgba(255, 107, 53, 0.05), rgba(26, 58, 82, 0.1));
+        border: 2px solid transparent;
+        border-radius: 20px;
+        padding: 40px 30px;
+        text-align: center;
+        text-decoration: none;
+        color: inherit;
+        transition: all 0.3s ease;
+        cursor: pointer;
+        backdrop-filter: blur(10px);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .action-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+        transition: left 0.5s ease;
+    }
+
+    .action-card:hover::before {
+        left: 100%;
+    }
+
+    .action-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 15px 40px rgba(255, 107, 53, 0.2);
+    }
+
+    .action-card.admin {
+        border-color: #FF006E;
+    }
+
+    .action-card.admin:hover {
+        background: linear-gradient(135deg, rgba(255, 0, 110, 0.15), rgba(255, 0, 110, 0.05));
+        box-shadow: 0 15px 40px rgba(255, 0, 110, 0.3);
+    }
+
+    .action-card.student {
+        border-color: #FF6B35;
+    }
+
+    .action-card.student:hover {
+        background: linear-gradient(135deg, rgba(255, 107, 53, 0.15), rgba(255, 107, 53, 0.05));
+        box-shadow: 0 15px 40px rgba(255, 107, 53, 0.3);
+    }
+
+    .action-card.info {
+        border-color: #00D9FF;
+    }
+
+    .action-card.info:hover {
+        background: linear-gradient(135deg, rgba(0, 217, 255, 0.15), rgba(0, 217, 255, 0.05));
+        box-shadow: 0 15px 40px rgba(0, 217, 255, 0.3);
+    }
+
+    .action-card.workshop {
+        border-color: #00FF41;
+    }
+
+    .action-card.workshop:hover {
+        background: linear-gradient(135deg, rgba(0, 255, 65, 0.15), rgba(0, 255, 65, 0.05));
+        box-shadow: 0 15px 40px rgba(0, 255, 65, 0.3);
+    }
+
+    .icon-wrapper {
+        font-size: 3rem;
+        margin-bottom: 15px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 70px;
+        height: 70px;
+        border-radius: 50%;
+        background: rgba(255, 107, 53, 0.1);
+    }
+
+    .action-card.admin .icon-wrapper {
+        background: rgba(255, 0, 110, 0.1);
+    }
+
+    .action-card.student .icon-wrapper {
+        background: rgba(255, 107, 53, 0.1);
+    }
+
+    .action-card.info .icon-wrapper {
+        background: rgba(0, 217, 255, 0.1);
+    }
+
+    .action-card.workshop .icon-wrapper {
+        background: rgba(0, 255, 65, 0.1);
+    }
+
+    .card-title {
+        font-size: 1.5rem;
+        font-weight: 700;
+        margin-bottom: 12px;
+    }
+
+    .card-description {
+        font-size: 0.95rem;
+        color: #8B96A8;
+        line-height: 1.6;
+        margin-bottom: 20px;
+    }
+
+    .card-btn {
+        display: inline-block;
+        padding: 12px 24px;
+        border-radius: 10px;
+        font-weight: 600;
+        font-size: 0.9rem;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        transition: all 0.3s ease;
+        border: 2px solid currentColor;
+        background: transparent;
+        color: inherit;
+        text-decoration: none;
+    }
+
+    .action-card.admin .card-btn {
+        color: #FF006E;
+    }
+
+    .action-card.admin .card-btn:hover {
+        background: #FF006E;
+        color: white;
+        box-shadow: 0 10px 25px rgba(255, 0, 110, 0.4);
+    }
+
+    .action-card.student .card-btn {
+        color: #FF6B35;
+    }
+
+    .action-card.student .card-btn:hover {
+        background: #FF6B35;
+        color: white;
+        box-shadow: 0 10px 25px rgba(255, 107, 53, 0.4);
+    }
+
+    .action-card.info .card-btn {
+        color: #00D9FF;
+    }
+
+    .action-card.info .card-btn:hover {
+        background: #00D9FF;
+        color: #0F2333;
+        box-shadow: 0 10px 25px rgba(0, 217, 255, 0.4);
+    }
+
+    .action-card.workshop .card-btn {
+        color: #00FF41;
+    }
+
+    .action-card.workshop .card-btn:hover {
+        background: #00FF41;
+        color: #0F2333;
+        box-shadow: 0 10px 25px rgba(0, 255, 65, 0.4);
+    }
+
+    .features-section {
+        background: linear-gradient(135deg, rgba(26, 58, 82, 0.1), rgba(255, 107, 53, 0.05));
+        padding: 80px 20px;
+        margin-top: 40px;
+    }
+
+    .features-title {
+        text-align: center;
+        font-size: 2.5rem;
+        font-weight: 800;
+        margin-bottom: 60px;
+        background: linear-gradient(135deg, #FF6B35, #00D9FF);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+
+    .features-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 30px;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    .feature-item {
+        text-align: center;
+        padding: 30px;
+    }
+
+    .feature-icon {
+        font-size: 2.5rem;
+        margin-bottom: 15px;
+    }
+
+    .feature-name {
+        font-weight: 600;
+        font-size: 1.1rem;
+        color: #E8E8FF;
+        margin-bottom: 8px;
+    }
+
+    .feature-desc {
+        font-size: 0.9rem;
+        color: #8B96A8;
+    }
+
+    @media (max-width: 768px) {
+        .hero-title {
+            font-size: 2rem;
+        }
+
+        .hero-subtitle {
+            font-size: 1rem;
+        }
+
+        .action-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .features-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+</style>
+
+<div class="home-hero" data-aos="fade-up">
+    <div class="hero-content">
+        <!-- Hero Brand -->
+        <div class="hero-brand">
+            <span class="material-icons" style="color: #FF6B35; font-size: 3rem;">school</span>
+            <span class="material-icons" style="color: #00D9FF; font-size: 3rem;">event</span>
+        </div>
+
+        <!-- Title -->
+        <h1 class="hero-title" data-aos="zoom-in" data-aos-delay="100">FOSSEE Workshop Booking</h1>
+        
+        <!-- Subtitle -->
+        <p class="hero-subtitle" data-aos="fade-up" data-aos-delay="200">
+            Manage and coordinate workshops seamlessly with our modern platform
+        </p>
+
+        <!-- Action Grid -->
+        <div class="action-grid">
+            <!-- Admin Login -->
+            <a href="{% url 'admin:index' %}" class="action-card admin" data-aos="zoom-in" data-aos-delay="300">
+                <div class="icon-wrapper">
+                    <span class="material-icons">admin_panel_settings</span>
+                </div>
+                <h3 class="card-title">Admin Portal</h3>
+                <p class="card-description">Access the administrative dashboard to manage workshops, users, and system settings</p>
+                <button class="card-btn">Enter Admin</button>
+            </a>
+
+            <!-- Student Login -->
+            <a href="{% url 'workshop_app:login' %}" class="action-card student" data-aos="zoom-in" data-aos-delay="400">
+                <div class="icon-wrapper">
+                    <span class="material-icons">person_outline</span>
+                </div>
+                <h3 class="card-title">Student Login</h3>
+                <p class="card-description">Sign in to explore workshops, register for events, and track your progress</p>
+                <button class="card-btn">Sign In</button>
+            </a>
+
+            <!-- Statistics -->
+            <a href="{% url 'statistics_app:public' %}" class="action-card info" data-aos="zoom-in" data-aos-delay="500">
+                <div class="icon-wrapper">
+                    <span class="material-icons">bar_chart</span>
+                </div>
+                <h3 class="card-title">Statistics</h3>
+                <p class="card-description">View comprehensive statistics about workshops across different regions and categories</p>
+                <button class="card-btn">View Stats</button>
+            </a>
+
+            <!-- Workshops -->
+            <a href="{% url 'workshop_app:workshop_type_list' %}" class="action-card workshop" data-aos="zoom-in" data-aos-delay="600">
+                <div class="icon-wrapper">
+                    <span class="material-icons">event_note</span>
+                </div>
+                <h3 class="card-title">Workshops</h3>
+                <p class="card-description">Browse available workshops and explore different types of training programs</p>
+                <button class="card-btn">Browse</button>
+            </a>
+        </div>
+    </div>
+</div>
+
+<!-- Features Section -->
+<div class="features-section" data-aos="fade-up">
+    <h2 class="features-title" data-aos="zoom-in">Why Choose FOSSEE?</h2>
+    
+    <div class="features-grid">
+        <div class="feature-item" data-aos="zoom-in" data-aos-delay="100">
+            <div class="feature-icon">📚</div>
+            <div class="feature-name">Quality Workshops</div>
+            <div class="feature-desc">Expert-led workshops on cutting-edge technologies</div>
+        </div>
+
+        <div class="feature-item" data-aos="zoom-in" data-aos-delay="200">
+            <div class="feature-icon">🌍</div>
+            <div class="feature-name">Nationwide Reach</div>
+            <div class="feature-desc">Workshops available across multiple regions</div>
+        </div>
+
+        <div class="feature-item" data-aos="zoom-in" data-aos-delay="300">
+            <div class="feature-icon">📊</div>
+            <div class="feature-name">Real-time Analytics</div>
+            <div class="feature-desc">Track progress with detailed statistics</div>
+        </div>
+
+        <div class="feature-item" data-aos="zoom-in" data-aos-delay="400">
+            <div class="feature-icon">🔒</div>
+            <div class="feature-name">Secure Platform</div>
+            <div class="feature-desc">Enterprise-grade security and data protection</div>
+        </div>
+
+        <div class="feature-item" data-aos="zoom-in" data-aos-delay="500">
+            <div class="feature-icon">🎯</div>
+            <div class="feature-name">Easy Management</div>
+            <div class="feature-desc">Streamlined workshop coordination and registration</div>
+        </div>
+
+        <div class="feature-item" data-aos="zoom-in" data-aos-delay="600">
+            <div class="feature-icon">💡</div>
+            <div class="feature-name">Innovation Focused</div>
+            <div class="feature-desc">Stay updated with latest industry trends</div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

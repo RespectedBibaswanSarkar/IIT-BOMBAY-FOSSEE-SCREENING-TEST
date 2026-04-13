@@ -1,0 +1,478 @@
+/* ============================================================================
+   AOS (Animate On Scroll) INTEGRATION & SCROLL ANIMATIONS
+   ============================================================================
+   
+   This file contains scroll-triggered animations using Intersection Observer API.
+   Compatible with AOS library or custom scroll animation logic.
+   ============================================================================ */
+
+/* ============================================================================
+   SCROLL ANIMATION TRIGGERS
+   ============================================================================ */
+
+[data-aos] {
+  opacity: 0;
+  transform: translateY(30px);
+  will-change: opacity, transform;
+}
+
+[data-aos="fade-in"] {
+  opacity: 0;
+  transform: none;
+}
+
+[data-aos="slide-up"] {
+  opacity: 0;
+  transform: translateY(60px);
+}
+
+[data-aos="slide-down"] {
+  opacity: 0;
+  transform: translateY(-60px);
+}
+
+[data-aos="slide-left"] {
+  opacity: 0;
+  transform: translateX(60px);
+}
+
+[data-aos="slide-right"] {
+  opacity: 0;
+  transform: translateX(-60px);
+}
+
+[data-aos="zoom-in"] {
+  opacity: 0;
+  transform: scale(0.8);
+}
+
+[data-aos="zoom-out"] {
+  opacity: 0;
+  transform: scale(1.2);
+}
+
+[data-aos="rotate"] {
+  opacity: 0;
+  transform: rotate(-10deg) scale(0.9);
+}
+
+[data-aos="flip-left"] {
+  opacity: 0;
+  transform: perspective(1000px) rotateY(90deg);
+}
+
+/* Animated state for all elements */
+[data-aos].aos-animate {
+  opacity: 1;
+  transform: none !important;
+  animation-fill-mode: both;
+}
+
+/* Stagger animations for lists and grids */
+[data-aos-delay="0"] { animation-delay: 0ms; }
+[data-aos-delay="50"] { animation-delay: 50ms; }
+[data-aos-delay="100"] { animation-delay: 100ms; }
+[data-aos-delay="150"] { animation-delay: 150ms; }
+[data-aos-delay="200"] { animation-delay: 200ms; }
+[data-aos-delay="250"] { animation-delay: 250ms; }
+[data-aos-delay="300"] { animation-delay: 300ms; }
+[data-aos-delay="400"] { animation-delay: 400ms; }
+[data-aos-delay="500"] { animation-delay: 500ms; }
+
+/* Duration variations */
+[data-aos-duration="300"] { animation-duration: 300ms; }
+[data-aos-duration="500"] { animation-duration: 500ms; }
+[data-aos-duration="700"] { animation-duration: 700ms; }
+[data-aos-duration="1000"] { animation-duration: 1000ms; }
+[data-aos-duration="1500"] { animation-duration: 1500ms; }
+
+/* Easing variations */
+[data-aos-easing="ease-in-out"] { animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1); }
+[data-aos-easing="ease-out"] { animation-timing-function: cubic-bezier(0, 0, 0.2, 1); }
+[data-aos-easing="ease-in"] { animation-timing-function: cubic-bezier(0.4, 0, 1, 1); }
+[data-aos-easing="ease-linear"] { animation-timing-function: linear; }
+
+/* ============================================================================
+   PARALLAX SCROLLING EFFECTS
+   ============================================================================ */
+
+.parallax {
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+  overflow: hidden;
+}
+
+.parallax::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(15, 18, 25, 0.4) 100%);
+  z-index: 1;
+}
+
+.parallax-content {
+  position: relative;
+  z-index: 2;
+}
+
+@media (max-width: 768px) {
+  .parallax {
+    background-attachment: scroll;
+  }
+}
+
+/* ============================================================================
+   REVEAL ON SCROLL - STAGGER EFFECT
+   ============================================================================ */
+
+.reveal-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.reveal-list > * {
+  opacity: 0;
+  transform: translateX(-30px);
+  animation: slideInLeft 0.6s var(--ease-out) forwards;
+}
+
+.reveal-list > :nth-child(1) { animation-delay: 0ms; }
+.reveal-list > :nth-child(2) { animation-delay: 100ms; }
+.reveal-list > :nth-child(3) { animation-delay: 200ms; }
+.reveal-list > :nth-child(4) { animation-delay: 300ms; }
+.reveal-list > :nth-child(5) { animation-delay: 400ms; }
+.reveal-list > :nth-child(n+6) { animation-delay: 500ms; }
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* ============================================================================
+   GRID REVEAL ANIMATIONS
+   ============================================================================ */
+
+.reveal-grid {
+  display: grid;
+  gap: var(--space-6);
+}
+
+.reveal-grid > * {
+  opacity: 0;
+  transform: scale(0.9) translateY(20px);
+  animation: scaleInUp 0.6s var(--ease-out) forwards;
+}
+
+.reveal-grid > :nth-child(1) { animation-delay: 0ms; }
+.reveal-grid > :nth-child(2) { animation-delay: 100ms; }
+.reveal-grid > :nth-child(3) { animation-delay: 200ms; }
+.reveal-grid > :nth-child(4) { animation-delay: 300ms; }
+.reveal-grid > :nth-child(5) { animation-delay: 400ms; }
+.reveal-grid > :nth-child(6) { animation-delay: 500ms; }
+.reveal-grid > :nth-child(n+7) { animation-delay: 600ms; }
+
+@keyframes scaleInUp {
+  from {
+    opacity: 0;
+    transform: scale(0.9) translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* ============================================================================
+   COUNTER ANIMATIONS
+   ============================================================================ */
+
+.counter {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--color-orange-primary);
+}
+
+.counter-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.counter::before {
+  content: attr(data-target);
+  animation: countUp;
+  animation-duration: 2s;
+  animation-timing-function: ease-in-out;
+  animation-fill-mode: forwards;
+}
+
+@keyframes countUp {
+  from { counter: counter(0); }
+  to { counter: counter(attr(data-target)); }
+}
+
+/* ============================================================================
+   HOVER & INTERACTION ANIMATIONS
+   ============================================================================ */
+
+/* Card hover lift */
+.card-lift {
+  transition: all var(--duration-normal) var(--ease-in-out);
+}
+
+.card-lift:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--elevation-5);
+}
+
+/* Smooth text highlight */
+.text-highlight {
+  background: linear-gradient(120deg, #FF7A00 0%, #FF8C1F 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: highlightPulse 3s ease-in-out infinite;
+}
+
+@keyframes highlightPulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+/* Icon animations */
+.icon-rotate:hover {
+  animation: spin 2s linear infinite;
+}
+
+.icon-pulse:hover {
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+.icon-bounce:hover {
+  animation: bounce 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+/* ============================================================================
+   SCROLL-TRIGGERED TEXT ANIMATIONS
+   ============================================================================ */
+
+.animate-text {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.2em;
+}
+
+.animate-text span {
+  opacity: 0;
+  animation: fadeInUp 0.6s ease-out forwards;
+}
+
+.animate-text span:nth-child(1) { animation-delay: 0ms; }
+.animate-text span:nth-child(2) { animation-delay: 60ms; }
+.animate-text span:nth-child(3) { animation-delay: 120ms; }
+.animate-text span:nth-child(4) { animation-delay: 180ms; }
+.animate-text span:nth-child(5) { animation-delay: 240ms; }
+.animate-text span:nth-child(n+6) { animation-delay: calc(30ms * (n - 5)); }
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ============================================================================
+   SCROLL PROGRESS INDICATOR
+   ============================================================================ */
+
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--color-orange-primary), var(--color-cyan));
+  width: 0%;
+  z-index: 999;
+  animation: none;
+  box-shadow: 0 0 10px var(--glow-orange-subtle);
+}
+
+/* ============================================================================
+   PAGE TRANSITION ANIMATIONS
+   ============================================================================ */
+
+.page-enter {
+  animation: pageEnter 0.5s var(--ease-out);
+}
+
+@keyframes pageEnter {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.page-exit {
+  animation: pageExit 0.3s var(--ease-in);
+}
+
+@keyframes pageExit {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+}
+
+/* ============================================================================
+   SECTION REVEAL WITH GRADIENT
+   ============================================================================ */
+
+.section-reveal {
+  position: relative;
+  overflow: hidden;
+}
+
+.section-reveal::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 122, 0, 0.1), transparent);
+  animation: shimmerSwipe 2s ease-in-out forwards;
+}
+
+@keyframes shimmerSwipe {
+  from {
+    left: -100%;
+  }
+  to {
+    left: 100%;
+  }
+}
+
+/* ============================================================================
+   BUTTON CLICK RIPPLE EFFECT
+   ============================================================================ */
+
+.ripple {
+  position: relative;
+  overflow: hidden;
+}
+
+.ripple::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 5px;
+  height: 5px;
+  background: rgba(255, 255, 255, 0.5);
+  opacity: 0;
+  border-radius: 50%;
+  transform: scale(1) translate(-50%, -50%);
+  transform-origin: 50% 50%;
+  animation: rippleEffect 0.6s ease-out;
+}
+
+@keyframes rippleEffect {
+  0% {
+    width: 5px;
+    height: 5px;
+    opacity: 1;
+  }
+  100% {
+    width: 500px;
+    height: 500px;
+    opacity: 0;
+  }
+}
+
+/* ============================================================================
+   GRADIENT TEXT ANIMATION
+   ============================================================================ */
+
+.gradient-text {
+  background: linear-gradient(90deg, var(--color-orange-primary), var(--color-cyan), var(--color-orange-primary));
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: gradientShift 3s ease infinite;
+  font-weight: 700;
+}
+
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* ============================================================================
+   RESPONSIVE ADJUSTMENTS FOR ANIMATIONS
+   ============================================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  [data-aos],
+  .reveal-list > *,
+  .reveal-grid > *,
+  .card-lift,
+  .animate-text span,
+  .page-enter,
+  .gradient-text {
+    animation: none !important;
+    transform: none !important;
+    opacity: 1 !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .reveal-list > * {
+    animation-delay: 0ms !important;
+  }
+  
+  .reveal-grid > * {
+    animation-delay: 0ms !important;
+  }
+  
+  .parallax {
+    background-attachment: scroll;
+  }
+}

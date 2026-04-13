@@ -1,0 +1,299 @@
+{% extends 'workshop_app/base.html' %}
+
+{% block title %} FOSSEE Workshop Statistics - Modern Dashboard {% endblock %}
+
+{% block extra-dependencies %}
+<!-- Chartjs Datalabels for better chart readability -->
+<script src="https://cdn.jsdelivr.net/npm/chartjs-datalabels@2"></script>
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid py-5" style="background: linear-gradient(180deg, #0A0E27 0%, #15192A 100%); min-height: 100vh;">
+    
+    <!-- Header Section -->
+    <div class="row mb-5" data-aos="fade-down">
+        <div class="col-12">
+            <div style="text-align: center; margin-bottom: 2rem;">
+                <h1 class="text-gradient" style="font-size: 3rem; font-weight: 800; text-shadow: 0 0 30px rgba(255, 107, 53, 0.3);">
+                    <span class="material-icons" style="font-size: 3.5rem; color: #FF6B35; vertical-align: middle;">bar_chart</span>
+                    Workshop Statistics
+                </h1>
+                <p style="color: #B8C5D6; font-size: 1.1rem; margin-top: 1rem;">
+                    Real-time analytics and insights about FOSSEE workshops
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <!-- Filter Sidebar -->
+        <div class="col-lg-3 mb-4" data-aos="fade-right">
+            <div class="card h-100" style="border: 2px solid #FF6B35; background: linear-gradient(135deg, rgba(28, 34, 64, 0.9) 0%, rgba(42, 90, 127, 0.9) 100%); box-shadow: 0 0 30px rgba(255, 107, 53, 0.2);">
+                <div class="card-header" style="background: linear-gradient(90deg, #FF6B35, #FF8A50); border: none; padding: 1.5rem;">
+                    <h3 style="margin: 0; color: white; display: flex; align-items: center; gap: 0.5rem;">
+                        <span class="material-icons">filter_alt</span>
+                        Filters
+                    </h3>
+                </div>
+                
+                <div class="card-body">
+                    <form method="GET" id="filterForm">
+                        <!-- Date Range Filter -->
+                        <div class="mb-3">
+                            <label class="form-label" style="color: #FF6B35; font-weight: 600;">
+                                <span class="material-icons" style="font-size: 18px;">date_range</span>
+                                Date Range
+                            </label>
+                            <div class="input-group mb-2">
+                                <input type="date" name="from_date" class="form-control" placeholder="From" value="{{ form.from_date.value|default:'' }}" style="background: rgba(28, 34, 64, 0.8); border-color: #FF6B35; color: #B8C5D6;">
+                            </div>
+                            <div class="input-group">
+                                <input type="date" name="to_date" class="form-control" placeholder="To" value="{{ form.to_date.value|default:'' }}" style="background: rgba(28, 34, 64, 0.8); border-color: #FF6B35; color: #B8C5D6;">
+                            </div>
+                        </div>
+
+                        <!-- Workshop Type Filter -->
+                        <div class="mb-3">
+                            <label class="form-label" style="color: #FF6B35; font-weight: 600;">
+                                <span class="material-icons" style="font-size: 18px;">category</span>
+                                Workshop Type
+                            </label>
+                            <select name="workshop_type" class="form-select" style="background: rgba(28, 34, 64, 0.8); border-color: #FF6B35; color: #B8C5D6;">
+                                {{ form.workshop_type }}
+                            </select>
+                        </div>
+
+                        <!-- State Filter -->
+                        <div class="mb-3">
+                            <label class="form-label" style="color: #FF6B35; font-weight: 600;">
+                                <span class="material-icons" style="font-size: 18px;">location_on</span>
+                                State
+                            </label>
+                            <select name="state" class="form-select" style="background: rgba(28, 34, 64, 0.8); border-color: #FF6B35; color: #B8C5D6;">
+                                {{ form.state }}
+                            </select>
+                        </div>
+
+                        <!-- Sort Filter -->
+                        <div class="mb-3">
+                            <label class="form-label" style="color: #FF6B35; font-weight: 600;">
+                                <span class="material-icons" style="font-size: 18px;">sort</span>
+                                Sort By
+                            </label>
+                            <select name="sort" class="form-select" style="background: rgba(28, 34, 64, 0.8); border-color: #FF6B35; color: #B8C5D6;">
+                                {{ form.sort }}
+                            </select>
+                        </div>
+
+                        <!-- Show User's Workshops -->
+                        {% if request.user.is_authenticated %}
+                        <div class="mb-3">
+                            <div class="form-check" style="color: #B8C5D6;">
+                                {{ form.show_workshops }}
+                                <label class="form-check-label" for="id_show_workshops">
+                                    Show only my workshops
+                                </label>
+                            </div>
+                        </div>
+                        {% endif %}
+
+                        <!-- Action Buttons -->
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-primary" style="background: linear-gradient(135deg, #FF6B35, #FF8A50); border: none;">
+                                <span class="material-icons" style="vertical-align: middle; font-size: 18px;">search</span>
+                                <span class="ms-2">Apply Filters</span>
+                            </button>
+                            <a href="{% url 'statistics_app:public' %}" class="btn btn-outline-danger">
+                                <span class="material-icons" style="vertical-align: middle; font-size: 18px;">clear_all</span>
+                                <span class="ms-2">Clear Filters</span>
+                            </a>
+                            <button type="submit" name="download" value="download" class="btn btn-info" style="background: linear-gradient(135deg, #00D9FF, #00CED1); border: none; color: #0A0E27; font-weight: 600;">
+                                <span class="material-icons" style="vertical-align: middle; font-size: 18px;">download</span>
+                                <span class="ms-2">Download CSV</span>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content Area -->
+        <div class="col-lg-9">
+            <!-- Statistics Cards Row -->
+            <div class="row mb-4">
+                <div class="col-md-6 col-lg-4 mb-3" data-aos="zoom-in" data-aos-delay="100">
+                    <div class="card" style="border: 1px solid #FF6B35; background: linear-gradient(135deg, rgba(255, 107, 53, 0.1), rgba(255, 107, 53, 0.05)); box-shadow: 0 0 25px rgba(255, 107, 53, 0.2);">
+                        <div class="card-body text-center">
+                            <span class="material-icons" style="font-size: 2.5rem; color: #FF6B35; margin-bottom: 0.5rem;">event</span>
+                            <h4 style="color: #B8C5D6; margin-bottom: 0.5rem;">Total Workshops</h4>
+                            <h2 style="color: #FF6B35; font-weight: 800;" data-counter="{{ ws_count|default:0 }}" data-duration="2000">0</h2>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4 mb-3" data-aos="zoom-in" data-aos-delay="150">
+                    <div class="card" style="border: 1px solid #00D9FF; background: linear-gradient(135deg, rgba(0, 217, 255, 0.1), rgba(0, 217, 255, 0.05)); box-shadow: 0 0 25px rgba(0, 217, 255, 0.2);">
+                        <div class="card-body text-center">
+                            <span class="material-icons" style="font-size: 2.5rem; color: #00D9FF; margin-bottom: 0.5rem;">place</span>
+                            <h4 style="color: #B8C5D6; margin-bottom: 0.5rem;">States Covered</h4>
+                            <h2 style="color: #00D9FF; font-weight: 800;" data-counter="{{ ws_states|length|default:0 }}" data-duration="1500">0</h2>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4 mb-3" data-aos="zoom-in" data-aos-delay="200">
+                    <div class="card" style="border: 1px solid #00FF41; background: linear-gradient(135deg, rgba(0, 255, 65, 0.1), rgba(0, 255, 65, 0.05)); box-shadow: 0 0 25px rgba(0, 255, 65, 0.2);">
+                        <div class="card-body text-center">
+                            <span class="material-icons" style="font-size: 2.5rem; color: #00FF41; margin-bottom: 0.5rem;">category</span>
+                            <h4 style="color: #B8C5D6; margin-bottom: 0.5rem;">Types</h4>
+                            <h2 style="color: #00FF41; font-weight: 800;" data-counter="{{ ws_type|length|default:0 }}" data-duration="1500">0</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Charts Section -->
+            <div class="row">
+                <!-- State Distribution Chart -->
+                {% if ws_states %}
+                <div class="col-lg-6 mb-4" data-aos="fade-up" data-aos-delay="250">
+                    <div class="chart-container">
+                        <h3 class="chart-title">
+                            <span class="material-icons" style="vertical-align: middle;">place</span>
+                            Workshops by State
+                        </h3>
+                        <canvas id="stateChart" data-chart-type="bar" data-chart-data='{"labels": {{ ws_states|safe }}, "datasets": [{"label": "Workshops", "data": {{ ws_count|safe }}, "backgroundColor": "#FF6B35"}]}'></canvas>
+                    </div>
+                </div>
+                {% endif %}
+
+                <!-- Workshop Type Distribution -->
+                {% if ws_type %}
+                <div class="col-lg-6 mb-4" data-aos="fade-up" data-aos-delay="300">
+                    <div class="chart-container">
+                        <h3 class="chart-title">
+                            <span class="material-icons" style="vertical-align: middle;">category</span>
+                            Workshops by Type
+                        </h3>
+                        <canvas id="typeChart" data-chart-type="pie" data-chart-data='{"labels": {{ ws_type|safe }}, "data": {{ ws_type_count|safe }}}'></canvas>
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+
+            <!-- Workshops Table -->
+            {% if objects %}
+            <div class="mt-5" data-aos="fade-up" data-aos-delay="350">
+                <div class="card" style="border: 1px solid #FF6B35; background: linear-gradient(135deg, rgba(28, 34, 64, 0.8), rgba(42, 90, 127, 0.8));">
+                    <div class="card-header" style="background: linear-gradient(90deg, #1A3A52, #2A5A7F); border: none;">
+                        <h4 style="margin: 0; color: #FF6B35; display: flex; align-items: center; gap: 0.5rem;">
+                            <span class="material-icons">table_chart</span>
+                            Workshop Details
+                        </h4>
+                    </div>
+                    
+                    <div class="card-body p-0">
+                        <div class="table-responsive">
+                            <table class="table" style="margin: 0;">
+                                <thead>
+                                    <tr style="background: linear-gradient(90deg, #FF6B35, #FF8A50);">
+                                        <th style="color: white;">Workshop</th>
+                                        <th style="color: white;">Coordinator</th>
+                                        <th style="color: white;">Instructor</th>
+                                        <th style="color: white;">State</th>
+                                        <th style="color: white;">Date</th>
+                                        <th style="color: white;">Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for workshop in objects %}
+                                    <tr data-aos="fade-up" data-aos-delay="{{ forloop.counter|mul:50 }}">
+                                        <td>{{ workshop.workshop_type.name }}</td>
+                                        <td>{{ workshop.coordinator.get_full_name }}</td>
+                                        <td>{{ workshop.instructor.get_full_name }}</td>
+                                        <td><span class="badge badge-info">{{ workshop.coordinator.profile.state }}</span></td>
+                                        <td>{{ workshop.date|date:"d M Y" }}</td>
+                                        <td>
+                                            {% if workshop.status == 1 %}
+                                                <span class="badge" style="background: #00FF41; color: #0A0E27; padding: 0.5rem 1rem;">Success</span>
+                                            {% elif workshop.status == 0 %}
+                                                <span class="badge" style="background: #FFB703; color: #0A0E27; padding: 0.5rem 1rem;">Pending</span>
+                                            {% else %}
+                                                <span class="badge" style="background: #FF006E; color: white; padding: 0.5rem 1rem;">Rejected</span>
+                                            {% endif %}
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Pagination -->
+                    {% if is_paginated %}
+                    <div class="card-footer" style="background: rgba(15, 35, 51, 0.5); border-top: 1px solid #FF6B35;">
+                        <nav aria-label="Page navigation">
+                            <ul class="pagination mb-0">
+                                {% if page_obj.has_previous %}
+                                <li class="page-item">
+                                    <a class="page-link" href="?page=1">« First</a>
+                                </li>
+                                <li class="page-item">
+                                    <a class="page-link" href="?page={{ page_obj.previous_page_number }}">‹ Previous</a>
+                                </li>
+                                {% endif %}
+
+                                <li class="page-item active">
+                                    <span class="page-link">Page {{ page_obj.number }} of {{ paginator.num_pages }}</span>
+                                </li>
+
+                                {% if page_obj.has_next %}
+                                <li class="page-item">
+                                    <a class="page-link" href="?page={{ page_obj.next_page_number }}">Next ›</a>
+                                </li>
+                                <li class="page-item">
+                                    <a class="page-link" href="?page={{ paginator.num_pages }}">Last »</a>
+                                </li>
+                                {% endif %}
+                            </ul>
+                        </nav>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+            {% else %}
+            <div class="chart-no-data" data-aos="fade-up">
+                <div class="chart-no-data-icon">📊</div>
+                <div class="chart-no-data-text">No workshops found matching your filters</div>
+                <div class="chart-no-data-hint">Try adjusting your filter criteria</div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block extra-custom-scripts %}
+<script>
+    // Initialize counter animations
+    document.addEventListener('DOMContentLoaded', function() {
+        if (typeof animateCounters === 'function') {
+            animateCounters();
+        }
+        
+        // Initialize charts
+        if (typeof NeonCharts !== 'undefined') {
+            NeonCharts.initBarChart('stateChart', 
+                {{ ws_states|safe }}, 
+                [{ label: 'Workshops', data: {{ ws_count|safe }}, backgroundColor: '#FF6B35' }]
+            );
+            
+            NeonCharts.initPieChart('typeChart', 
+                {{ ws_type|safe }},
+                {{ ws_type_count|safe }}
+            );
+        }
+    });
+</script>
+{% endblock %}

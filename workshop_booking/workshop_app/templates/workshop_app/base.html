@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+{% load custom_filters %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="FOSSEE Workshop Booking System - Material 3 Design">
+    <title>
+        {% block title %}
+            FOSSEE Workshops
+        {% endblock %}
+    </title>
+
+    <!-- ============== MODERN NEON THEME - FOSSEE BRANDING ============== -->
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Material Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- AOS (Animate On Scroll) Library -->
+    <link rel="stylesheet" href="https://unpkg.com/aos@2/dist/aos.css">
+    
+    <!-- Base & Legacy CSS -->
+    <link rel="stylesheet" href="{% static 'workshop_app/css/font-awesome.css' %}" type="text/css"/>
+    <link rel="stylesheet" href="{% static 'workshop_app/css/toastr.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css">
+    
+    <!-- Modern Neon Theme CSS -->
+    <link rel="stylesheet" href="{% static 'workshop_app/css/neon-theme.css' %}" type="text/css"/>
+    <link rel="stylesheet" href="{% static 'workshop_app/css/animations.css' %}" type="text/css"/>
+    <link rel="stylesheet" href="{% static 'workshop_app/css/charts-modern.css' %}" type="text/css"/>
+    
+    <!-- Custom Admin CSS -->
+    <link rel="stylesheet" href="{% static 'workshop_app/css/custom_admin.css' %}" type="text/css"/>
+    
+    <!-- ============== JAVASCRIPT DEPENDENCIES ============== -->
+    
+    <!-- jQuery (for compatibility) -->
+    <script src="{% static 'workshop_app/js/jquery-3.4.1.min.js' %}"></script>
+    
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" defer></script>
+    
+    <!-- Popper & UI -->
+    <script src="{% static 'workshop_app/js/popper.min.js' %}"></script>
+    <script src="{% static 'workshop_app/js/toastr.min.js' %}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    
+    <!-- Chart.js 4.x - Modern Charts with Neon Styling -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.min.js" defer></script>
+    
+    <!-- AOS (Animate On Scroll) -->
+    <script src="https://unpkg.com/aos@2/dist/aos.js" defer></script>
+    
+    <!-- Modern Charts Styling & Initialization -->
+    <script src="{% static 'workshop_app/js/charts-neon.js' %}" defer></script>
+    
+    <!-- Modern Interactive Components -->
+    <script src="{% static 'workshop_app/js/modern-interactions.js' %}" defer></script>
+
+    {% block extra-dependencies %}
+    {% endblock %}
+
+    {% block extra-custom-scripts %}
+    {% endblock %}
+
+</head>
+
+<body>
+    <!-- Navbar Body Padding for Fixed Top Navigation -->
+    <style>
+        body {
+            padding-top: 70px;
+        }
+    </style>
+    
+{% block header %}
+    <nav class="navbar navbar-expand-lg fixed-top" style="border-bottom: 2px solid #FF6B35; box-shadow: 0 0 30px rgba(255, 107, 53, 0.3); background: linear-gradient(90deg, #1A3A52, #2A5A7F);">
+        <div class="container-fluid">
+            <!-- FOSSEE Logo - Always links to home -->
+            <a class="navbar-brand" href="/" data-aos="fade-right" style="display: flex; align-items: center; gap: 10px; text-decoration: none;">
+                <svg width="120" height="40" viewBox="0 0 140 50" fill="none" xmlns="http://www.w3.org/2000/svg" style="filter: drop-shadow(0 0 10px rgba(255, 107, 53, 0.3)); transition: all 0.3s ease;" onmouseover="this.style.filter='drop-shadow(0 0 20px rgba(255, 107, 53, 0.6))'; this.style.transform='scale(1.05)'" onmouseout="this.style.filter='drop-shadow(0 0 10px rgba(255, 107, 53, 0.3))'; this.style.transform='scale(1)'">
+                  <rect width="140" height="8" fill="#FF6B35"/>
+                  <text x="10" y="38" font-family="Poppins, sans-serif" font-size="28" font-weight="800" fill="#FF6B35" letter-spacing="2">FOSSEE</text>
+                  <text x="12" y="48" font-family="Poppins, sans-serif" font-size="9" fill="#8B96A8" letter-spacing="1">better education</text>
+                </svg>
+            </a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" style="border-color: #FF6B35;">
+                <span class="navbar-toggler-icon" style="background-image: none;">
+                    <span class="material-icons" style="color: #FF6B35;">menu</span>
+                </span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/" data-aos="fade-up" data-aos-delay="100">
+                            <span class="material-icons" style="font-size: 18px;">home</span>
+                            Home
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'statistics_app:public' %}" data-aos="fade-up" data-aos-delay="200">
+                            <span class="material-icons" style="font-size: 18px;">bar_chart</span>
+                            Statistics
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'workshop_app:workshop_type_list' %}" data-aos="fade-up" data-aos-delay="150">
+                            <span class="material-icons" style="font-size: 18px;">event_note</span>
+                            Workshops
+                        </a>
+                    </li>
+                </ul>
+                
+                {% if user.is_authenticated %}
+                <ul class="navbar-nav me-auto">
+                    {% if request.user|has_group:"instructor" %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'statistics_app:team' %}" data-aos="fade-up" data-aos-delay="150">
+                            <span class="material-icons" style="font-size: 18px;">group</span>
+                            Team Stats
+                        </a>
+                    </li>
+                    {% endif %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'workshop_app:workshop_status_instructor' %}" data-aos="fade-up" data-aos-delay="250">
+                            <span class="material-icons" style="font-size: 18px;">event_note</span>
+                            Workshops
+                        </a>
+                    </li>
+                    {% if not request.user|has_group:"instructor" %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'workshop_app:propose_workshop' %}" data-aos="fade-up" data-aos-delay="300">
+                                <span class="material-icons" style="font-size: 18px;">add_circle</span>
+                                Propose
+                            </a>
+                        </li>
+                    {% endif %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'workshop_app:workshop_type_list' %}" data-aos="fade-up" data-aos-delay="350">
+                            <span class="material-icons" style="font-size: 18px;">category</span>
+                            Types
+                        </a>
+                    </li>
+                </ul>
+                
+                <div class="ms-auto">
+                    <ul class="navbar-nav">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                               data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-aos="fade-left">
+                               <span class="material-icons" style="vertical-align: middle; font-size: 20px;">account_circle</span>
+                                <span class="ms-2">{{user.get_full_name|title|default:"Profile"}}</span>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown" style="background: linear-gradient(135deg, #1A3A52, #2A5A7F); border: 1px solid #FF6B35;">
+                                <a class="dropdown-item" href="{% url 'workshop_app:view_own_profile' %}" style="color: #B8C5D6;">
+                                    <span class="material-icons" style="font-size: 18px; vertical-align: middle;">person</span>
+                                    <span class="ms-2">Profile</span>
+                                </a>
+                                <div class="dropdown-divider" style="border-color: #FF6B35;"></div>
+                                <a class="dropdown-item" href="{% url 'password_change' %}" style="color: #B8C5D6;">
+                                    <span class="material-icons" style="font-size: 18px; vertical-align: middle;">security</span>
+                                    <span class="ms-2">Change Password</span>
+                                </a>
+                                <a class="dropdown-item" href="{% url 'workshop_app:logout' %}" style="color: #FF6B35;">
+                                    <span class="material-icons" style="font-size: 18px; vertical-align: middle;">logout</span>
+                                    <span class="ms-2">Logout</span>
+                                </a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                {% else %}
+                <div class="ms-auto">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link btn btn-sm" href="{% url 'admin:login' %}" data-aos="fade-left" data-aos-delay="50" style="background: linear-gradient(135deg, #FF006E, #FF1493); box-shadow: 0 0 20px rgba(255, 0, 110, 0.3); margin-right: 10px; border-radius: 8px; padding: 8px 16px;">
+                                <span class="material-icons" style="font-size: 16px;">admin_panel_settings</span>
+                                <span class="ms-1">Admin</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link btn btn-sm btn-primary" href="{% url 'workshop_app:login' %}" data-aos="fade-left" style="background: linear-gradient(135deg, #FF6B35, #FF8A50); box-shadow: 0 0 20px rgba(255, 107, 53, 0.3); border-radius: 8px; padding: 8px 16px;">
+                                <span class="material-icons" style="font-size: 16px;">login</span>
+                                <span class="ms-1">Student</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </nav>
+{% endblock %}
+
+<div class="base-content">
+    {% block content %}
+        <div class="container mt-5">
+            <h1 data-aos="fade-up">Welcome to FOSSEE Workshops</h1>
+            <p data-aos="fade-up" data-aos-delay="100">Please customize this template by extending this base template</p>
+        </div>
+    {% endblock %}
+</div>
+
+<!-- Bootstrap 5 JS (already included above) -->
+
+<!-- Initialize Notifications & Modern Features -->
+<script>
+    // Display messages using toastr
+    {% if messages %}
+        {% for message in messages %}
+            toastr[{% if message.tags %} "{{ message.tags }}" {% else %} "info" {% endif %}]("{{ message }}");
+        {% endfor %}
+    {% endif %}
+    
+    // Initialize AOS on page load
+    document.addEventListener('DOMContentLoaded', function() {
+        if (typeof AOS !== 'undefined') {
+            AOS.init({
+                duration: 800,
+                easing: 'ease-in-out-cubic',
+                once: false,
+                mirror: true
+            });
+        }
+        console.log('FOSSEE Workshops Modern Theme Initialized');
+    });
+</script>
+
+</body>
+<footer class="footer" style="background: linear-gradient(90deg, #0F2333, #1A3A52); border-top: 2px solid #FF6B35; box-shadow: 0 -5px 15px rgba(255, 107, 53, 0.2); margin-top: 4rem; padding: 2rem 0; color: #B8C5D6;">
+    {% block footer %}
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-8">
+                    <small style="display: flex; align-items: center; gap: 0.5rem;">
+                        <span class="material-icons" style="font-size: 16px; color: #FF6B35;">info</span>
+                        Developed by <span style="color: #FF6B35; font-weight: 600;">FOSSEE</span> group, <span style="color: #00D9FF; font-weight: 600;">IIT Bombay</span>
+                    </small>
+                </div>
+                <div class="col-md-4 text-end">
+                    <small style="color: #8B96A8;">© 2024 All Rights Reserved | Modern UI Theme v1.0</small>
+                </div>
+            </div>
+        </div> 
+    {% endblock %}
+</footer>
+</html>

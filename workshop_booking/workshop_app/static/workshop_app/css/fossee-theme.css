@@ -1,0 +1,841 @@
+/* ============================================================================
+   FOSSEE WORKSHOP BOOKING - MODERN NEON ORANGE + MATERIAL UI THEME
+   ============================================================================
+   
+   Color Scheme:
+   - Primary Accent: Neon Orange (#FF7A00, #FF6B00)
+   - Secondary: Deep Blue (#1a1a2e, #0F1219)
+   - Accent: Cyan (#00D9FF) for secondary highlights
+   - Backgrounds: Multiple shades of dark blue for depth
+   
+   Design System: Material Design 3 + Glassmorphism + Neon Effects
+   ============================================================================ */
+
+:root {
+  /* ============================================================
+     PRIMARY COLOR PALETTE
+     ============================================================ */
+  
+  /* Neon Orange - FOSSEE Primary */
+  --color-orange-primary: #FF7A00;
+  --color-orange-bright: #FF8C1F;
+  --color-orange-vivid: #FF6B00;
+  --color-orange-dark: #CC6200;
+  --color-orange-light: #FFB347;
+  
+  /* Orange Glows */
+  --glow-orange: 0 0 20px rgba(255, 122, 0, 0.6), 0 0 40px rgba(255, 122, 0, 0.3);
+  --glow-orange-subtle: 0 0 15px rgba(255, 122, 0, 0.4);
+  --glow-orange-intense: 0 0 30px rgba(255, 122, 0, 0.8), 0 0 60px rgba(255, 122, 0, 0.4);
+  
+  /* Deep Blue - Background Base */
+  --color-blue-darkest: #0F1219;
+  --color-blue-dark: #1a1a2e;
+  --color-blue-medium: #16213e;
+  --color-blue-surface: #0f3460;
+  --color-blue-light: #533483;
+  
+  /* Secondary Cyan - Highlights */
+  --color-cyan: #00D9FF;
+  --color-cyan-dark: #005A6F;
+  --color-cyan-light: #80EFFF;
+  
+  /* Status Colors */
+  --color-success: #00FF41;
+  --color-error: #FF0055;
+  --color-warning: #FFB800;
+  --color-info: #00D9FF;
+  
+  /* Text Colors */
+  --text-primary: #FFFFFF;
+  --text-secondary: #E0E0E0;
+  --text-tertiary: #A8A8A8;
+  --text-muted: #6E6E6E;
+  
+  /* ============================================================
+     BACKGROUNDS & SURFACES
+     ============================================================ */
+  
+  --bg-primary: #0F1219;
+  --bg-secondary: #1a1a2e;
+  --bg-tertiary: #16213e;
+  --bg-surface: #0f3460;
+  
+  /* Glassmorphism Effects */
+  --glass-bg: rgba(255, 255, 255, 0.03);
+  --glass-bg-hover: rgba(255, 255, 255, 0.06);
+  --glass-bg-active: rgba(255, 122, 0, 0.08);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --glass-border-hover: rgba(255, 122, 0, 0.3);
+  --glass-border-focus: rgba(255, 122, 0, 0.5);
+  
+  /* ============================================================
+     SHADOWS & DEPTH
+     ============================================================ */
+  
+  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.03);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.6), inset 0 1px 2px rgba(255, 255, 255, 0.05);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.7), inset 0 1px 2px rgba(255, 255, 255, 0.05);
+  --shadow-xl: 0 12px 32px rgba(0, 0, 0, 0.8), inset 0 1px 2px rgba(255, 255, 255, 0.05);
+  --shadow-2xl: 0 20px 40px rgba(0, 0, 0, 0.9);
+  
+  /* Elevation Shadows - Material Design 3 */
+  --elevation-0: none;
+  --elevation-1: 0 2px 4px rgba(0, 0, 0, 0.5);
+  --elevation-2: 0 4px 8px rgba(0, 0, 0, 0.6);
+  --elevation-3: 0 6px 12px rgba(0, 0, 0, 0.7);
+  --elevation-4: 0 8px 16px rgba(0, 0, 0, 0.75);
+  --elevation-5: 0 12px 24px rgba(0, 0, 0, 0.85);
+  
+  /* ============================================================
+     BLUR & EFFECTS
+     ============================================================ */
+  
+  --blur-xs: blur(4px);
+  --blur-sm: blur(10px);
+  --blur-md: blur(20px);
+  --blur-lg: blur(30px);
+  --blur-xl: blur(40px);
+  
+  /* ============================================================
+     SPACING SCALE (8px BASE)
+     ============================================================ */
+  
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-20: 80px;
+  
+  /* ============================================================
+     BORDER RADIUS
+     ============================================================ */
+  
+  --radius-xs: 2px;
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-2xl: 20px;
+  --radius-3xl: 24px;
+  --radius-full: 9999px;
+  
+  /* ============================================================
+     ANIMATIONS & TRANSITIONS
+     ============================================================ */
+  
+  --duration-fast: 150ms;
+  --duration-base: 250ms;
+  --duration-normal: 300ms;
+  --duration-slow: 500ms;
+  --duration-slower: 750ms;
+  --duration-slowest: 1000ms;
+  
+  --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-out: cubic-bezier(0, 0, 0.2, 1);
+  --ease-in: cubic-bezier(0.4, 0, 1, 1);
+  --ease-flex: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --ease-bounce: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  --ease-sharp: cubic-bezier(0.4, 0, 0.6, 1);
+  
+  /* ============================================================
+     FONT SIZES - Material Design 3 Scale
+     ============================================================ */
+  
+  --font-display-large: 4rem;
+  --font-display-medium: 2.8rem;
+  --font-display-small: 2.2rem;
+  --font-headline-large: 2rem;
+  --font-headline-medium: 1.6rem;
+  --font-headline-small: 1.4rem;
+  --font-title-large: 1.4rem;
+  --font-title-medium: 1rem;
+  --font-title-small: 0.9rem;
+  --font-body-large: 1rem;
+  --font-body-medium: 0.9rem;
+  --font-body-small: 0.8rem;
+  --font-label-large: 0.9rem;
+  --font-label-medium: 0.8rem;
+  --font-label-small: 0.7rem;
+  
+  /* ============================================================
+     Z-INDEX SCALE
+     ============================================================ */
+  
+  --z-dropdown: 100;
+  --z-modal-backdrop: 200;
+  --z-modal: 210;
+  --z-popover: 300;
+  --z-sticky: 50;
+  --z-app-bar: 1000;
+  --z-drawer: 800;
+}
+
+/* ============================================================================
+   SYSTEM PREFERENCES & DARK MODE
+   ============================================================================ */
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --text-primary: #FFFFFF;
+    --bg-primary: #0F1219;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ============================================================================
+   GLOBAL STYLES
+   ============================================================================ */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+*:focus {
+  outline: none;
+  box-shadow: inset 0 0 0 2px var(--color-orange-primary);
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px;
+}
+
+body {
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: 'Roboto', 'Segoe UI', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  font-size: 1rem;
+  line-height: 1.6;
+  font-weight: 400;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* Background gradient with subtle neon glow */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    radial-gradient(circle at 20% 30%, rgba(255, 122, 0, 0.05) 0%, transparent 40%),
+    radial-gradient(circle at 80% 80%, rgba(0, 217, 255, 0.03) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* Prevent body from being selected */
+body {
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+
+/* ============================================================================
+   TYPOGRAPHY
+   ============================================================================ */
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 600;
+  line-height: 1.2;
+  margin-bottom: var(--space-4);
+  color: var(--text-primary);
+}
+
+h1 {
+  font-size: var(--font-display-medium);
+  font-weight: 700;
+  animation: slideDown 0.6s var(--ease-out);
+  letter-spacing: -0.5px;
+}
+
+h2 {
+  font-size: var(--font-headline-large);
+  font-weight: 600;
+  animation: slideDown 0.7s var(--ease-out);
+}
+
+h3 {
+  font-size: var(--font-headline-medium);
+  font-weight: 600;
+}
+
+h4 {
+  font-size: var(--font-title-large);
+  font-weight: 500;
+}
+
+h5 {
+  font-size: var(--font-title-medium);
+  font-weight: 500;
+}
+
+h6 {
+  font-size: var(--font-title-small);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+p {
+  margin-bottom: var(--space-4);
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+
+small {
+  font-size: var(--font-body-small);
+  color: var(--text-tertiary);
+}
+
+code {
+  background: rgba(255, 122, 0, 0.1);
+  color: var(--color-orange-light);
+  padding: 2px 8px;
+  border-radius: var(--radius-sm);
+  font-family: 'Monaco', 'Courier New', monospace;
+  font-size: 0.9em;
+}
+
+/* ============================================================================
+   LINKS & INTERACTIVE ELEMENTS
+   ============================================================================ */
+
+a {
+  color: var(--color-orange-primary);
+  text-decoration: none;
+  transition: all var(--duration-normal) var(--ease-in-out);
+  position: relative;
+  font-weight: 500;
+}
+
+a:hover {
+  color: var(--color-orange-bright);
+  text-shadow: var(--glow-orange-subtle);
+}
+
+a:active {
+  color: var(--color-orange-vivid);
+  transform: scale(0.98);
+}
+
+a::after {
+  content: '';
+  position: absolute;
+  bottom: -3px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--color-orange-primary), var(--color-orange-bright));
+  transition: width var(--duration-normal) var(--ease-in-out);
+  border-radius: var(--radius-full);
+}
+
+a:hover::after {
+  width: 100%;
+}
+
+/* ============================================================================
+   BUTTONS - MATERIAL DESIGN 3 STYLE
+   ============================================================================ */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-5);
+  font-size: var(--font-label-large);
+  font-weight: 500;
+  border: none;
+  border-radius: var(--radius-lg);
+  cursor: pointer;
+  transition: all var(--duration-normal) var(--ease-in-out);
+  position: relative;
+  overflow: hidden;
+  text-decoration: none;
+  white-space: nowrap;
+  user-select: none;
+}
+
+.btn::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  transform: translate(-50%, -50%);
+  transition: width var(--duration-normal) var(--ease-in-out), 
+              height var(--duration-normal) var(--ease-in-out);
+  z-index: 1;
+}
+
+.btn:hover::before {
+  width: 300px;
+  height: 300px;
+}
+
+.btn > * {
+  position: relative;
+  z-index: 2;
+}
+
+/* Primary Button - Neon Orange */
+.btn-primary {
+  background: linear-gradient(135deg, var(--color-orange-primary) 0%, var(--color-orange-bright) 100%);
+  color: #FFFFFF;
+  border: 2px solid transparent;
+  box-shadow: var(--elevation-2);
+}
+
+.btn-primary:hover {
+  background: linear-gradient(135deg, var(--color-orange-bright) 0%, var(--color-orange-vivid) 100%);
+  box-shadow: var(--glow-orange);
+  transform: translateY(-2px);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+  box-shadow: var(--elevation-1);
+}
+
+/* Secondary Button - Outline */
+.btn-secondary {
+  background: transparent;
+  color: var(--color-orange-primary);
+  border: 2px solid var(--color-orange-primary);
+  box-shadow: var(--elevation-0);
+}
+
+.btn-secondary:hover {
+  background: rgba(255, 122, 0, 0.1);
+  border-color: var(--color-orange-bright);
+  color: var(--color-orange-bright);
+  box-shadow: inset 0 0 0 2px rgba(255, 122, 0, 0.2);
+}
+
+/* Success Button */
+.btn-success {
+  background: linear-gradient(135deg, var(--color-success) 0%, #00CC33 100%);
+  color: #000;
+  border: none;
+}
+
+.btn-success:hover {
+  box-shadow: 0 0 20px rgba(0, 255, 65, 0.5);
+}
+
+/* Danger Button */
+.btn-danger {
+  background: linear-gradient(135deg, var(--color-error) 0%, #CC0044 100%);
+  color: #FFFFFF;
+  border: none;
+}
+
+.btn-danger:hover {
+  box-shadow: 0 0 20px rgba(255, 0, 85, 0.5);
+}
+
+/* Disabled Button */
+.btn:disabled {
+  background: var(--bg-tertiary);
+  color: var(--text-muted);
+  border-color: var(--text-muted);
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+/* Small Button */
+.btn-sm {
+  padding: var(--space-2) var(--space-3);
+  font-size: var(--font-label-small);
+}
+
+/* Large Button */
+.btn-lg {
+  padding: var(--space-4) var(--space-8);
+  font-size: var(--font-label-large);
+}
+
+/* ============================================================================
+   FORMS & INPUTS
+   ============================================================================ */
+
+input, textarea, select {
+  width: 100%;
+  padding: var(--space-3) var(--space-4);
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-md);
+  color: var(--text-primary);
+  font-size: 1rem;
+  font-family: inherit;
+  transition: all var(--duration-normal) var(--ease-in-out);
+}
+
+input:focus, textarea:focus, select:focus {
+  background: var(--glass-bg-hover);
+  border-color: var(--glass-border-focus);
+  box-shadow: inset 0 0 0 1px var(--color-orange-primary),
+              0 0 0 3px rgba(255, 122, 0, 0.2);
+}
+
+input::placeholder {
+  color: var(--text-muted);
+}
+
+/* ============================================================================
+   CARDS & CONTAINERS - MATERIAL DESIGN 3
+   ============================================================================ */
+
+.card, .mui-card {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-xl);
+  padding: var(--space-6);
+  transition: all var(--duration-normal) var(--ease-in-out);
+  box-shadow: var(--elevation-1);
+  backdrop-filter: var(--blur-sm);
+}
+
+.card:hover, .mui-card:hover {
+  background: var(--glass-bg-hover);
+  border-color: var(--glass-border-hover);
+  box-shadow: var(--elevation-3);
+  transform: translateY(-2px);
+}
+
+.card-filled {
+  background: linear-gradient(135deg, rgba(255, 122, 0, 0.05) 0%, rgba(0, 217, 255, 0.03) 100%);
+  border: 1px solid rgba(255, 122, 0, 0.15);
+}
+
+.card-elevated {
+  box-shadow: var(--elevation-4);
+}
+
+.card-outlined {
+  background: transparent;
+  border: 2px solid var(--glass-border-hover);
+}
+
+/* ============================================================================
+   ANIMATIONS & KEYFRAMES
+   ============================================================================ */
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideRight {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+@keyframes glow {
+  0%, 100% {
+    box-shadow: var(--glow-orange);
+  }
+  50% {
+    box-shadow: var(--glow-orange-intense);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+/* ============================================================================
+   UTILITY CLASSES
+   ============================================================================ */
+
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 var(--space-4);
+}
+
+.flex {
+  display: flex;
+}
+
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.grid {
+  display: grid;
+}
+
+.grid-2 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--space-6);
+}
+
+.grid-3 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: var(--space-6);
+}
+
+.grid-4 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--space-6);
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.text-orange {
+  color: var(--color-orange-primary);
+}
+
+.text-cyan {
+  color: var(--color-cyan);
+}
+
+.text-success {
+  color: var(--color-success);
+}
+
+.text-error {
+  color: var(--color-error);
+}
+
+.text-muted {
+  color: var(--text-muted);
+}
+
+.mt-1 { margin-top: var(--space-2); }
+.mt-2 { margin-top: var(--space-4); }
+.mt-3 { margin-top: var(--space-6); }
+.mt-4 { margin-top: var(--space-8); }
+
+.mb-1 { margin-bottom: var(--space-2); }
+.mb-2 { margin-bottom: var(--space-4); }
+.mb-3 { margin-bottom: var(--space-6); }
+.mb-4 { margin-bottom: var(--space-8); }
+
+.p-1 { padding: var(--space-2); }
+.p-2 { padding: var(--space-4); }
+.p-3 { padding: var(--space-6); }
+.p-4 { padding: var(--space-8); }
+
+.opacity-50 { opacity: 0.5; }
+.opacity-75 { opacity: 0.75; }
+.opacity-100 { opacity: 1; }
+
+.loading {
+  animation: spin 2s linear infinite;
+}
+
+/* ============================================================================
+   RESPONSIVE DESIGN - MOBILE FIRST
+   ============================================================================ */
+
+@media (max-width: 640px) {
+  :root {
+    --font-display-medium: 2rem;
+    --font-headline-large: 1.5rem;
+  }
+  
+  .grid-2, .grid-3, .grid-4 {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 0 var(--space-3);
+  }
+}
+
+@media (min-width: 1024px) {
+  .grid-2 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .grid-3 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  
+  .grid-4 {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* ============================================================================
+   ACCESSIBILITY & PRINT
+   ============================================================================ */
+
+@media print {
+  body::before {
+    display: none;
+  }
+  
+  .no-print {
+    display: none !important;
+  }
+}
+
+/* ============================================================================
+   SCROLLBAR STYLING
+   ============================================================================ */
+
+::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-secondary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--color-orange-primary), var(--color-cyan));
+  border-radius: var(--radius-full);
+  border: 3px solid var(--bg-secondary);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, var(--color-orange-bright), var(--color-cyan-light));
+  box-shadow: var(--glow-orange-subtle);
+}

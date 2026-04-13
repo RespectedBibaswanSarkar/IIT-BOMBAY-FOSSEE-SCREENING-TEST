@@ -1,0 +1,53 @@
+{% extends 'workshop_app/base_modern.html' %}
+{% load static %}
+
+{% block title %} Workshop Statistics - FOSSEE {% endblock %}
+
+{% block extra-dependencies %}
+    <script src="{% static 'statistics_app/js/ModernStatsComponent.js' %}" type="text/babel"></script>
+    <style>
+        .MuiTableCell-root {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+<div id="modern-stats-root">
+    <!-- React will mount here -->
+    <div style="display: grid; place-items: center; min-height: 50vh;">
+        <div class="btn loading" style="color: var(--accent-orange); font-size: 1.5rem;">Loading Modern Analytics...</div>
+    </div>
+</div>
+
+<script type="text/babel">
+    const monthlyData = {{ workshop_count|safe }};
+    const typeLabelData = {{ workshoptype_count.0|safe }};
+    const typeValueData = {{ workshoptype_count.1|safe }};
+    const typeData = [typeLabelData, typeValueData];
+    const mapData = {{ india_map|safe }};
+    
+    // Prepare upcoming workshops data for React
+    const upcomingWorkshops = [
+        {% for workshop in upcoming_workshops %}
+            {
+                coordinator: "{{ workshop.proposed_workshop_coordinator.get_full_name|default:workshop.requested_workshop_coordinator.get_full_name|capfirst }}",
+                institute: "{{ workshop.proposed_workshop_coordinator.profile.institute|default:workshop.requested_workshop_coordinator.profile.institute|capfirst }}",
+                instructor: "{{ workshop.proposed_workshop_instructor.get_full_name|default:workshop.requested_workshop_instructor.get_full_name }}",
+                title: "{{ workshop.proposed_workshop_title.workshoptype_name|default:workshop.requested_workshop_title.workshoptype_name }}",
+                date: "{{ workshop.proposed_workshop_date|default:workshop.requested_workshop_date|date }}"
+            }{% if not forloop.last %},{% endif %}
+        {% endfor %}
+    ];
+
+    const root = ReactDOM.createRoot(document.getElementById('modern-stats-root'));
+    root.render(
+        <ModernStatsComponent 
+            monthlyData={monthlyData} 
+            typeData={typeData}
+            mapData={mapData}
+            upcomingWorkshops={upcomingWorkshops}
+        />
+    );
+</script>
+{% endblock %}
